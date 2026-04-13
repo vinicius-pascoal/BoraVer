@@ -13,7 +13,11 @@ html {
 }
 
 body {
-  @apply bg-darker text-white font-sans;
+  @apply text-white font-sans;
+  background: radial-gradient(circle at 20% 10%, rgba(139, 92, 246, 0.35), transparent 35%),
+    radial-gradient(circle at 80% 20%, rgba(124, 58, 237, 0.25), transparent 30%),
+    linear-gradient(165deg, #140816 0%, #09060d 45%, #000000 100%);
+  background-attachment: fixed;
 }
 
 .container {

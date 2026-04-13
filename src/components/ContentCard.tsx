@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 interface ContentCardProps {
   content: any;
@@ -14,7 +14,20 @@ export function ContentCard({
   onSortearAgain,
   isLoading,
 }: ContentCardProps) {
+  const [isSynopsisExpanded, setIsSynopsisExpanded] = useState(false);
+
+  useEffect(() => {
+    setIsSynopsisExpanded(false);
+  }, [content?.id]);
+
   if (!content) return null;
+
+  const synopsis = content.overview || "Sem sinopse disponível";
+  const synopsisLimit = 220;
+  const isLongSynopsis = synopsis.length > synopsisLimit;
+  const visibleSynopsis = isSynopsisExpanded
+    ? synopsis
+    : `${synopsis.slice(0, synopsisLimit).trim()}...`;
 
   const isMovie = content.media_type === "movie";
   const title = isMovie ? content.title : content.name;
@@ -103,7 +116,16 @@ export function ContentCard({
                 Sinopse
               </h4>
               <p className="text-gray-300 leading-relaxed">
-                {content.overview || "Sem sinopse disponível"}
+                {isLongSynopsis ? visibleSynopsis : synopsis}
+                {isLongSynopsis && (
+                  <button
+                    type="button"
+                    onClick={() => setIsSynopsisExpanded((prev) => !prev)}
+                    className="ml-2 text-primary hover:text-purple-300 font-semibold underline underline-offset-2"
+                  >
+                    {isSynopsisExpanded ? "Ver menos" : "Ver mais"}
+                  </button>
+                )}
               </p>
             </div>
 

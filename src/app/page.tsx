@@ -58,7 +58,7 @@ export default function Home() {
   }, [filters]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-darker text-white">
+    <div className="min-h-screen flex flex-col text-white">
       <Header />
 
       <main className="flex-1 container py-12">
