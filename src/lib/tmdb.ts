@@ -36,7 +36,7 @@ const PLATFORM_MAP: Record<string, number> = {
 export async function getRandomContent(filters: {
   type: "movie" | "tv" | "both";
   genres?: number[];
-  platforms?: number[];
+  platforms?: Array<number | string>;
   region?: string;
   duration?: "short" | "medium" | "long";
 }) {
@@ -85,50 +85,77 @@ async function discoverContent(
   filters: any,
   region: string
 ) {
-  const params = new URLSearchParams({
-    api_key: TMDB_API_KEY!,
-    language: "pt-BR",
-    region: region,
-    sort_by: "popularity.desc",
-    page: String(Math.floor(Math.random() * 50) + 1),
-    "vote_average.gte": "5.0",
-    "vote_count.gte": "100",
-    include_adult: "false",
-  });
+  const platformIds: number[] = Array.isArray(filters.platforms)
+    ? filters.platforms
+        .map((platform: number | string) => {
+          if (typeof platform === "number") {
+            return platform;
+          }
 
-  if (filters.genres && filters.genres.length > 0) {
-    params.append("with_genres", filters.genres.join(","));
-  }
+          return getPlatformId(String(platform));
+        })
+        .filter((id): id is number => id !== undefined)
+    : [];
 
-  if (filters.duration && mediaType === "movie") {
-    // Filtrar por duração de filme
-    if (filters.duration === "short") {
-      params.append("with_runtime.lte", "90");
-    } else if (filters.duration === "medium") {
-      params.append("with_runtime.gte", "91");
-      params.append("with_runtime.lte", "120");
-    } else if (filters.duration === "long") {
-      params.append("with_runtime.gte", "121");
+  for (let attempt = 0; attempt < 3; attempt++) {
+    const params = new URLSearchParams({
+      api_key: TMDB_API_KEY!,
+      language: "pt-BR",
+      region: region,
+      sort_by: "popularity.desc",
+      page: String(Math.floor(Math.random() * 50) + 1),
+      "vote_average.gte": "5.0",
+      "vote_count.gte": "100",
+      include_adult: "false",
+    });
+
+    if (filters.genres && filters.genres.length > 0) {
+      // Use OR between selected genres to avoid over-restrictive searches.
+      params.append("with_genres", filters.genres.join("|"));
+    }
+
+    if (platformIds.length > 0) {
+      // Keep filtering in the selected market and providers.
+      params.append("watch_region", region);
+      params.append("with_watch_providers", platformIds.join("|"));
+      params.append("with_watch_monetization_types", "flatrate");
+    }
+
+    if (filters.duration && mediaType === "movie") {
+      // Filtrar por duração de filme
+      if (filters.duration === "short") {
+        params.append("with_runtime.lte", "90");
+      } else if (filters.duration === "medium") {
+        params.append("with_runtime.gte", "91");
+        params.append("with_runtime.lte", "120");
+      } else if (filters.duration === "long") {
+        params.append("with_runtime.gte", "121");
+      }
+    }
+
+    const response = await fetch(
+      `${TMDB_BASE_URL}/discover/${mediaType}?${params.toString()}`,
+      {
+        cache: "no-store",
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch ${mediaType} data`);
+    }
+
+    const data = await response.json();
+    const results = (data.results || []).map((item: any) => ({
+      ...item,
+      media_type: mediaType,
+    }));
+
+    if (results.length > 0) {
+      return results;
     }
   }
 
-  const response = await fetch(
-    `${TMDB_BASE_URL}/discover/${mediaType}?${params.toString()}`,
-    {
-      cache: "no-store",
-    }
-  );
-
-  if (!response.ok) {
-    throw new Error(`Failed to fetch ${mediaType} data`);
-  }
-
-  const data = await response.json();
-
-  return (data.results || []).map((item: any) => ({
-    ...item,
-    media_type: mediaType,
-  }));
+  return [];
 }
 
 async function getAvailablePlatforms(
