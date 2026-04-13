@@ -76,15 +76,36 @@ export default function Home() {
                 <button
                   onClick={fetchRandomContent}
                   disabled={isLoading}
-                  className="w-full mt-6 bg-gradient-to-r from-primary to-purple-400 hover:from-primary/80 hover:to-purple-400/80 disabled:from-gray-500 disabled:to-gray-600 text-white font-bold py-4 px-6 rounded-lg text-lg transition-all disabled:opacity-50 shadow-lg hover:shadow-primary/50"
+                  className="group w-full mt-6 rounded-xl border border-violet-300/35 bg-gradient-to-r from-violet-500/85 to-purple-500/85 hover:from-violet-400 hover:to-purple-400 disabled:from-gray-500 disabled:to-gray-600 text-white font-bold py-3.5 px-5 text-base transition-all disabled:opacity-50 shadow-[0_10px_28px_rgba(139,92,246,0.35)] hover:shadow-[0_14px_34px_rgba(139,92,246,0.45)]"
                 >
                   {isLoading ? (
                     <span className="flex items-center justify-center">
-                      <span className="mr-2">Carregando...</span>
-                      <span className="animate-spin">⚡</span>
+                      <span className="mr-2">Buscando sugestão...</span>
+                      <span className="animate-spin">◌</span>
                     </span>
                   ) : (
-                    "🎬 SORTEAR"
+                    <span className="flex items-center justify-center gap-2">
+                      <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-black/20 ring-1 ring-white/20 transition-transform group-hover:rotate-12">
+                        <svg
+                          viewBox="0 0 24 24"
+                          width="16"
+                          height="16"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="text-white"
+                        >
+                          <path
+                            d="M8 3H16C18.7614 3 21 5.23858 21 8V16C21 18.7614 18.7614 21 16 21H8C5.23858 21 3 18.7614 3 16V8C3 5.23858 5.23858 3 8 3Z"
+                            stroke="currentColor"
+                            strokeWidth="1.7"
+                          />
+                          <circle cx="8" cy="8" r="1.25" fill="currentColor" />
+                          <circle cx="12" cy="12" r="1.25" fill="currentColor" />
+                          <circle cx="16" cy="16" r="1.25" fill="currentColor" />
+                        </svg>
+                      </span>
+                      <span>SORTEAR AGORA</span>
+                    </span>
                   )}
                 </button>
               </div>
