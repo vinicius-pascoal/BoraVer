@@ -63,17 +63,6 @@ export default function Home() {
 
       <main className="flex-1 container py-12">
         <div className="space-y-8">
-          {/* Hero Section */}
-          <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent">
-              Descubra o que assistir
-            </h2>
-            <p className="text-gray-300 text-lg">
-              Cansado de ficar escolhendo entre mil opções? Deixe a gente
-              sortear para você!
-            </p>
-          </div>
-
           {/* Filtros e Conteúdo */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Sidebar de Filtros */}

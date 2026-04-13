@@ -58,6 +58,14 @@ export function FilterPanel({ onFiltersChange, isLoading }: FilterProps) {
     (filters.duration ? 1 : 0) +
     (filters.type !== "both" ? 1 : 0);
 
+  const selectedGenreNames = GENRES.filter((genre) =>
+    filters.genres.includes(genre.id)
+  )
+    .map((genre) => genre.name)
+    .join(", ");
+
+  const selectedPlatforms = filters.platforms.join(", ");
+
   const handleTypeChange = (type: "movie" | "tv" | "both") => {
     const newFilters = { ...filters, type };
     setFilters(newFilters);
@@ -104,11 +112,11 @@ export function FilterPanel({ onFiltersChange, isLoading }: FilterProps) {
   };
 
   return (
-    <div className="bg-dark rounded-xl border border-primary/20 p-6 space-y-6 shadow-xl">
-      <div className="flex items-start justify-between gap-4">
+    <div className="bg-dark rounded-xl border border-primary/20 p-4 space-y-4 shadow-xl">
+      <div className="flex items-start justify-between gap-3">
         <div>
-          <h3 className="text-xl font-semibold text-white">Filtros</h3>
-          <p className="text-sm text-gray-400 mt-1">
+          <h3 className="text-lg font-semibold text-white">Filtros</h3>
+          <p className="text-xs text-gray-400 mt-1">
             Refine seu sorteio em segundos
           </p>
         </div>
@@ -129,93 +137,102 @@ export function FilterPanel({ onFiltersChange, isLoading }: FilterProps) {
         </div>
       </div>
 
-      {/* Tipo de conteúdo */}
-      <div className="border border-white/5 rounded-xl p-4 bg-black/10">
-        <h3 className="text-base font-semibold mb-3 text-white">Tipo</h3>
-        <div className="flex flex-wrap gap-2">
-          {(["movie", "tv", "both"] as const).map((type) => (
-            <button
-              key={type}
-              onClick={() => handleTypeChange(type)}
-              disabled={isLoading}
-              className={`px-4 py-2 rounded-lg border text-sm font-medium transition-colors ${filters.type === type
-                ? "bg-primary/20 border-primary text-white"
-                : "bg-gray-800 border-gray-700 text-gray-300 hover:bg-gray-700"
-                } disabled:opacity-50`}
-            >
-              {type === "movie" ? "Filmes" : type === "tv" ? "Séries" : "Ambos"}
-            </button>
-          ))}
-        </div>
-      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <label className="space-y-1">
+          <span className="text-xs font-semibold uppercase tracking-wide text-gray-300">
+            Tipo
+          </span>
+          <select
+            value={filters.type}
+            onChange={(e) =>
+              handleTypeChange(e.target.value as "movie" | "tv" | "both")
+            }
+            disabled={isLoading}
+            className="w-full rounded-lg border border-gray-700 bg-gray-900 px-3 py-2 text-sm text-white outline-none transition focus:border-primary disabled:opacity-50"
+          >
+            <option value="both">Filmes e Séries</option>
+            <option value="movie">Apenas Filmes</option>
+            <option value="tv">Apenas Séries</option>
+          </select>
+        </label>
 
-      {/* Gêneros */}
-      <div className="border border-white/5 rounded-xl p-4 bg-black/10">
-        <h3 className="text-base font-semibold mb-3 text-white">Gêneros</h3>
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-          {GENRES.map((genre) => (
-            <button
-              key={genre.id}
-              onClick={() => handleGenreToggle(genre.id)}
-              disabled={isLoading}
-              className={`px-3 py-2 rounded-lg border text-sm font-medium transition-colors ${filters.genres.includes(genre.id)
-                ? "bg-primary/20 border-primary text-white"
-                : "bg-gray-800 border-gray-700 text-gray-300 hover:bg-gray-700"
-                } disabled:opacity-50`}
-            >
-              {genre.name}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Plataformas */}
-      <div className="border border-white/5 rounded-xl p-4 bg-black/10">
-        <h3 className="text-base font-semibold mb-3 text-white">Plataformas</h3>
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-          {PLATFORMS.map((platform) => (
-            <button
-              key={platform}
-              onClick={() => handlePlatformToggle(platform)}
-              disabled={isLoading}
-              className={`px-3 py-2 rounded-lg border text-sm font-medium transition-colors text-center ${filters.platforms.includes(platform)
-                ? "bg-primary/20 border-primary text-white"
-                : "bg-gray-800 border-gray-700 text-gray-300 hover:bg-gray-700"
-                } disabled:opacity-50`}
-            >
-              {platform}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Duração (apenas para filmes) */}
-      {filters.type !== "tv" && (
-        <div className="border border-white/5 rounded-xl p-4 bg-black/10">
-          <h3 className="text-base font-semibold mb-3 text-white">Duração</h3>
-          <div className="flex flex-wrap gap-2">
+        <label className="space-y-1">
+          <span className="text-xs font-semibold uppercase tracking-wide text-gray-300">
+            Duração
+          </span>
+          <select
+            value={filters.duration || ""}
+            onChange={(e) =>
+              handleDurationChange(
+                e.target.value === ""
+                  ? undefined
+                  : (e.target.value as "short" | "medium" | "long")
+              )
+            }
+            disabled={isLoading || filters.type === "tv"}
+            className="w-full rounded-lg border border-gray-700 bg-gray-900 px-3 py-2 text-sm text-white outline-none transition focus:border-primary disabled:opacity-50"
+          >
+            <option value="">Qualquer duração</option>
             {DURATIONS.map((duration) => (
-              <button
-                key={duration.value}
-                onClick={() =>
-                  handleDurationChange(
-                    filters.duration === duration.value
-                      ? undefined
-                      : (duration.value as "short" | "medium" | "long")
-                  )
-                }
-                disabled={isLoading}
-                className={`px-3 py-2 rounded-lg border text-sm font-medium transition-colors ${filters.duration === duration.value
-                  ? "bg-primary/20 border-primary text-white"
-                  : "bg-gray-800 border-gray-700 text-gray-300 hover:bg-gray-700"
-                  } disabled:opacity-50`}
-              >
+              <option key={duration.value} value={duration.value}>
                 {duration.label}
-              </button>
+              </option>
             ))}
-          </div>
+          </select>
+        </label>
+      </div>
+
+      <details className="rounded-lg border border-gray-700 bg-gray-900/60 group">
+        <summary className="cursor-pointer list-none px-3 py-2 text-sm text-white flex items-center justify-between">
+          <span className="font-medium">Gêneros</span>
+          <span className="text-xs text-gray-400 max-w-[70%] truncate text-right">
+            {filters.genres.length > 0 ? selectedGenreNames : "Todos"}
+          </span>
+        </summary>
+        <div className="px-3 pb-3 pt-1 grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-52 overflow-auto border-t border-gray-800">
+          {GENRES.map((genre) => (
+            <label
+              key={genre.id}
+              className="flex items-center gap-2 rounded-md px-2 py-1 text-sm text-gray-200 hover:bg-gray-800"
+            >
+              <input
+                type="checkbox"
+                checked={filters.genres.includes(genre.id)}
+                onChange={() => handleGenreToggle(genre.id)}
+                disabled={isLoading}
+                className="h-4 w-4 accent-violet-500"
+              />
+              <span>{genre.name}</span>
+            </label>
+          ))}
         </div>
-      )}
+      </details>
+
+      <details className="rounded-lg border border-gray-700 bg-gray-900/60 group">
+        <summary className="cursor-pointer list-none px-3 py-2 text-sm text-white flex items-center justify-between">
+          <span className="font-medium">Plataformas</span>
+          <span className="text-xs text-gray-400 max-w-[70%] truncate text-right">
+            {filters.platforms.length > 0 ? selectedPlatforms : "Todas"}
+          </span>
+        </summary>
+        <div className="px-3 pb-3 pt-1 grid grid-cols-1 sm:grid-cols-2 gap-2 border-t border-gray-800">
+          {PLATFORMS.map((platform) => (
+            <label
+              key={platform}
+              className="flex items-center gap-2 rounded-md px-2 py-1 text-sm text-gray-200 hover:bg-gray-800"
+            >
+              <input
+                type="checkbox"
+                checked={filters.platforms.includes(platform)}
+                onChange={() => handlePlatformToggle(platform)}
+                disabled={isLoading}
+                className="h-4 w-4 accent-violet-500"
+              />
+              <span>{platform}</span>
+            </label>
+          ))}
+        </div>
+      </details>
     </div>
   );
 }
