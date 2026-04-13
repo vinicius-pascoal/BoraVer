@@ -26,7 +26,7 @@ export interface Genre {
   name: string;
 }
 
-export interface Content extends Movie, TV { }
+export type Content = Movie | TV;
 
 export interface FilterOptions {
   type: "movie" | "tv" | "both";
@@ -42,6 +42,6 @@ export interface StreamingPlatform {
   logo_path: string | null;
 }
 
-export interface ContentWithPlatforms extends Movie | TV {
-  streaming_platforms ?: StreamingPlatform[];
-}
+export type ContentWithPlatforms = (Movie | TV) & {
+  streaming_platforms?: StreamingPlatform[];
+};

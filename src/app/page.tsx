@@ -119,7 +119,7 @@ export default function Home() {
                 <div className="bg-dark rounded-lg border border-primary/20 p-12 text-center">
                   <p className="text-gray-400 text-lg mb-4">
                     Aplique seus filtros e clique em{" "}
-                    <span className="text-primary font-semibold">"SORTEAR"</span>{" "}
+                    <span className="text-primary font-semibold">SORTEAR</span>{" "}
                     para descobrir algo para assistir
                   </p>
                   <div className="text-4xl">🍿</div>
