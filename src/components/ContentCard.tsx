@@ -42,6 +42,10 @@ export function ContentCard({ content }: ContentCardProps) {
       : "Não informado"
     : `${content.number_of_seasons || 0} temporadas • ${content.number_of_episodes || 0} episódios`;
 
+  const collectionName = isMovie
+    ? content.belongs_to_collection?.name || null
+    : null;
+
   return (
     <div className="result-reveal-card rounded-2xl border border-violet-300/20 bg-gradient-to-b from-violet-500/10 to-black/45 backdrop-blur-md overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.45)]">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6">
@@ -81,6 +85,11 @@ export function ContentCard({ content }: ContentCardProps) {
               {typeof content.vote_average === "number" && (
                 <span className="rounded-full bg-amber-400/15 px-3 py-1 text-xs text-amber-200 border border-amber-300/30">
                   Nota {content.vote_average.toFixed(1)}
+                </span>
+              )}
+              {collectionName && (
+                <span className="rounded-full bg-violet-500/20 px-3 py-1 text-xs text-violet-100 border border-violet-300/35 max-w-full truncate">
+                  Saga: {collectionName}
                 </span>
               )}
             </div>
