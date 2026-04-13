@@ -2,6 +2,10 @@
 
 Descubra rapidamente um filme ou série para assistir com base em seus filtros preferidos!
 
+## 🖼️ Demonstração
+
+![Demonstração do BoraVer](./demo.png)
+
 ## 🚀 Quick Start
 
 ### Pré-requisitos
@@ -54,9 +58,12 @@ Abra [http://localhost:3000](http://localhost:3000) no seu navegador para ver o 
 - ✅ Filtros por gênero
 - ✅ Filtros por plataforma de streaming
 - ✅ Filtros por duração (para filmes)
-- ✅ Exibição de pôster, título, sinopse
+- ✅ Exibição de pôster, título, sinopse, saga (quando aplicável) e plataformas
+- ✅ Sinopse com "Ver mais/Ver menos" e scroll personalizado
+- ✅ Modal "Sobre" acessível no footer
+- ✅ Animação de entrada ao exibir resultado
 - ✅ Design responsivo
-- ✅ Interface intuitiva e rápida
+- ✅ Interface intuitiva, rápida e moderna
 
 ## 🛠️ Stack
 
@@ -79,6 +86,7 @@ BoraVer/
 │   │   ├── layout.tsx
 │   │   └── page.tsx
 │   ├── components/
+│   │   ├── AboutModal.tsx
 │   │   ├── ContentCard.tsx
 │   │   ├── FilterPanel.tsx
 │   │   ├── Footer.tsx
@@ -88,6 +96,7 @@ BoraVer/
 │   └── types/
 │       └── index.ts
 ├── public/
+├── demo.png
 ├── .env.local (não versionado)
 ├── next.config.js
 ├── tailwind.config.ts
@@ -146,4 +155,4 @@ Dúvidas? Abra uma [issue](https://github.com/vinicius-pascoal/BoraVer/issues)!
 
 ---
 
-Desenvolvido com ❤️ por [Vinicius Pascoal](https://github.com/vinicius-pascoal)
+Desenvolvido por [Vinicius Pascoal](https://github.com/vinicius-pascoal)
