@@ -94,7 +94,7 @@ async function discoverContent(
 
         return getPlatformId(String(platform));
       })
-      .filter((id): id is number => id !== undefined)
+      .filter((id: number | undefined): id is number => id !== undefined)
     : [];
 
   for (let attempt = 0; attempt < 3; attempt++) {
