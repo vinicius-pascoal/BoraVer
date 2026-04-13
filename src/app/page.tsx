@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useCallback } from "react";
+import { AboutModal } from "../components/AboutModal";
 import { Header } from "../components/Header";
 import { FilterPanel, FilterState } from "../components/FilterPanel";
 import { ContentCard } from "../components/ContentCard";
@@ -16,6 +17,7 @@ export default function Home() {
     region: "BR",
   });
   const [error, setError] = useState<string | null>(null);
+  const [isAboutOpen, setIsAboutOpen] = useState(false);
 
   const handleFilterChange = useCallback((newFilters: FilterState) => {
     setFilters(newFilters);
@@ -136,7 +138,8 @@ export default function Home() {
         </div>
       </main>
 
-      <Footer />
+      <Footer onOpenAbout={() => setIsAboutOpen(true)} />
+      <AboutModal isOpen={isAboutOpen} onClose={() => setIsAboutOpen(false)} />
     </div>
   );
 }

@@ -87,14 +87,14 @@ async function discoverContent(
 ) {
   const platformIds: number[] = Array.isArray(filters.platforms)
     ? filters.platforms
-        .map((platform: number | string) => {
-          if (typeof platform === "number") {
-            return platform;
-          }
+      .map((platform: number | string) => {
+        if (typeof platform === "number") {
+          return platform;
+        }
 
-          return getPlatformId(String(platform));
-        })
-        .filter((id): id is number => id !== undefined)
+        return getPlatformId(String(platform));
+      })
+      .filter((id): id is number => id !== undefined)
     : [];
 
   for (let attempt = 0; attempt < 3; attempt++) {

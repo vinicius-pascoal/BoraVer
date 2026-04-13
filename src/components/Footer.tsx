@@ -3,7 +3,11 @@
 import Link from "next/link";
 import React from "react";
 
-export function Footer() {
+interface FooterProps {
+  onOpenAbout?: () => void;
+}
+
+export function Footer({ onOpenAbout }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
   return (
@@ -36,12 +40,13 @@ export function Footer() {
             >
               GitHub
             </Link>
-            <Link
-              href="#"
+            <button
+              type="button"
+              onClick={onOpenAbout}
               className="text-gray-400 hover:text-primary transition-colors"
             >
               Sobre
-            </Link>
+            </button>
           </div>
         </div>
       </div>
