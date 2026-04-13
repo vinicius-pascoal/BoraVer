@@ -46,14 +46,14 @@ export function ContentCard({ content }: ContentCardProps) {
     <div className="result-reveal-card rounded-2xl border border-violet-300/20 bg-gradient-to-b from-violet-500/10 to-black/45 backdrop-blur-md overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.45)]">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6">
         {/* Pôster */}
-        <div className="md:col-span-1 flex justify-center result-reveal-item result-delay-1">
-          <div className="relative w-full max-w-xs rounded-2xl overflow-hidden shadow-lg ring-1 ring-violet-200/20">
+        <div className="md:col-span-1 flex justify-center items-start self-start result-reveal-item result-delay-1">
+          <div className="relative inline-block w-fit h-fit max-w-full rounded-2xl overflow-hidden shadow-lg ring-1 ring-violet-200/20">
             <Image
               src={posterPath}
               alt={title}
               width={300}
               height={450}
-              className="w-full h-auto object-cover"
+              className="w-[300px] max-w-full h-auto object-cover"
               priority
             />
           </div>
