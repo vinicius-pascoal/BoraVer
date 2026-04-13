@@ -24,12 +24,14 @@ export function ContentCard({
 
   const posterPath = content.poster_path
     ? `${process.env.NEXT_PUBLIC_TMDB_IMAGE_BASE_URL}${content.poster_path}`
-    : "/no-poster.png";
+    : "/no-poster.svg";
 
   const genres = content.genres?.map((g: any) => g.name).join(", ") || "N/A";
 
   const duration = isMovie
-    ? `${content.runtime} min`
+    ? content.runtime
+      ? `${content.runtime} min`
+      : "Não informado"
     : `${content.number_of_seasons || 0} temporadas • ${content.number_of_episodes || 0} episódios`;
 
   return (
@@ -54,14 +56,14 @@ export function ContentCard({
           <div>
             <div className="flex items-center gap-3 mb-3">
               <h2 className="text-3xl font-bold text-white break-words">
-                {title}
+                {title || "Título não disponível"}
               </h2>
               <span className="px-3 py-1 bg-primary/20 border border-primary text-primary rounded-full text-sm font-medium whitespace-nowrap">
                 {isMovie ? "Filme" : "Série"}
               </span>
             </div>
 
-            <p className="text-gray-400 mb-4">{year}</p>
+            <p className="text-gray-400 mb-4">{year || "Ano não informado"}</p>
 
             <div className="mb-4">
               <h4 className="text-sm font-semibold text-gray-300 mb-1">

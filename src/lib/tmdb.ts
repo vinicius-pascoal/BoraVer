@@ -40,6 +40,10 @@ export async function getRandomContent(filters: {
   region?: string;
   duration?: "short" | "medium" | "long";
 }) {
+  if (!TMDB_API_KEY) {
+    throw new Error("TMDB API key is not configured");
+  }
+
   const region = filters.region || "BR";
   const type = filters.type;
 
@@ -120,7 +124,11 @@ async function discoverContent(
   }
 
   const data = await response.json();
-  return data.results;
+
+  return (data.results || []).map((item: any) => ({
+    ...item,
+    media_type: mediaType,
+  }));
 }
 
 async function getAvailablePlatforms(
@@ -136,6 +144,10 @@ async function getAvailablePlatforms(
       }
     );
 
+    if (!response.ok) {
+      throw new Error(`Failed to fetch ${mediaType} details`);
+    }
+
     const details = await response.json();
 
     // Buscar informações de "watch providers"
@@ -146,7 +158,7 @@ async function getAvailablePlatforms(
       }
     );
 
-    const watchData = await watchResponse.json();
+    const watchData = watchResponse.ok ? await watchResponse.json() : {};
     const regionData = watchData.results?.[region] || {};
 
     return {
