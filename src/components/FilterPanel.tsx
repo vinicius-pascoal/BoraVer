@@ -189,7 +189,7 @@ export function FilterPanel({ onFiltersChange, isLoading }: FilterProps) {
             {filters.genres.length > 0 ? selectedGenreNames : "Todos"}
           </span>
         </summary>
-        <div className="px-3 pb-3 pt-2 grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-52 overflow-auto border-t border-violet-300/10">
+        <div className="filters-scroll px-3 pb-3 pt-2 grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-52 overflow-y-auto border-t border-violet-300/10">
           {GENRES.map((genre) => (
             <label
               key={genre.id}
@@ -215,7 +215,7 @@ export function FilterPanel({ onFiltersChange, isLoading }: FilterProps) {
             {filters.platforms.length > 0 ? selectedPlatforms : "Todas"}
           </span>
         </summary>
-        <div className="px-3 pb-3 pt-2 grid grid-cols-1 sm:grid-cols-2 gap-2 border-t border-violet-300/10">
+        <div className="filters-scroll px-3 pb-3 pt-2 grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-44 overflow-y-auto border-t border-violet-300/10">
           {PLATFORMS.map((platform) => (
             <label
               key={platform}
