@@ -8,6 +8,7 @@ export interface FilterState {
   platforms: string[];
   region: string;
   duration?: "short" | "medium" | "long";
+  animeOnly?: boolean;
 }
 
 const GENRES = [
@@ -50,12 +51,14 @@ export function FilterPanel({ onFiltersChange, isLoading }: FilterProps) {
     platforms: [],
     region: "BR",
     duration: undefined,
+    animeOnly: false,
   });
 
   const selectedCount =
     filters.genres.length +
     filters.platforms.length +
     (filters.duration ? 1 : 0) +
+    (filters.animeOnly ? 1 : 0) +
     (filters.type !== "both" ? 1 : 0);
 
   const selectedGenreNames = GENRES.filter((genre) =>
@@ -98,6 +101,12 @@ export function FilterPanel({ onFiltersChange, isLoading }: FilterProps) {
     onFiltersChange(newFilters);
   };
 
+  const handleAnimeToggle = () => {
+    const newFilters = { ...filters, animeOnly: !filters.animeOnly };
+    setFilters(newFilters);
+    onFiltersChange(newFilters);
+  };
+
   const clearFilters = () => {
     const resetFilters: FilterState = {
       type: "both",
@@ -105,6 +114,7 @@ export function FilterPanel({ onFiltersChange, isLoading }: FilterProps) {
       platforms: [],
       region: "BR",
       duration: undefined,
+      animeOnly: false,
     };
 
     setFilters(resetFilters);
@@ -179,6 +189,28 @@ export function FilterPanel({ onFiltersChange, isLoading }: FilterProps) {
               </option>
             ))}
           </select>
+        </label>
+
+        <label className="sm:col-span-2 flex items-center justify-between rounded-xl border border-violet-300/20 bg-black/40 px-3 py-2">
+          <span className="text-xs font-semibold uppercase tracking-wide text-gray-300">
+            Somente anime
+          </span>
+          <button
+            type="button"
+            role="switch"
+            aria-checked={Boolean(filters.animeOnly)}
+            onClick={handleAnimeToggle}
+            disabled={isLoading}
+            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors disabled:opacity-50 ${
+              filters.animeOnly ? "bg-violet-500" : "bg-gray-700"
+            }`}
+          >
+            <span
+              className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                filters.animeOnly ? "translate-x-6" : "translate-x-1"
+              }`}
+            />
+          </button>
         </label>
       </div>
 

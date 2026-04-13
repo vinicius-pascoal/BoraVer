@@ -14,6 +14,7 @@ export async function GET(request: NextRequest) {
     const genresStr = searchParams.get("genres");
     const platformsStr = searchParams.get("platforms");
     const region = searchParams.get("region") || "BR";
+    const animeOnly = searchParams.get("animeOnly") === "true";
     const duration = searchParams.get("duration") as
       | "short"
       | "medium"
@@ -29,6 +30,7 @@ export async function GET(request: NextRequest) {
       platforms,
       region,
       duration,
+      animeOnly,
     };
 
     const content = await getRandomContent(filters);

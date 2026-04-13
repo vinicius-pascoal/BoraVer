@@ -39,6 +39,7 @@ export async function getRandomContent(filters: {
   platforms?: Array<number | string>;
   region?: string;
   duration?: "short" | "medium" | "long";
+  animeOnly?: boolean;
 }) {
   if (!TMDB_API_KEY) {
     throw new Error("TMDB API key is not configured");
@@ -109,7 +110,18 @@ async function discoverContent(
       include_adult: "false",
     });
 
-    if (filters.genres && filters.genres.length > 0) {
+    if (filters.animeOnly) {
+      const selectedGenres = Array.isArray(filters.genres)
+        ? filters.genres.filter((genreId: number) => genreId !== 16)
+        : [];
+
+      // Force animation and Japanese original language for anime-focused results.
+      params.append(
+        "with_genres",
+        selectedGenres.length > 0 ? [16, ...selectedGenres].join(",") : "16"
+      );
+      params.append("with_original_language", "ja");
+    } else if (filters.genres && filters.genres.length > 0) {
       // Use OR between selected genres to avoid over-restrictive searches.
       params.append("with_genres", filters.genres.join("|"));
     }

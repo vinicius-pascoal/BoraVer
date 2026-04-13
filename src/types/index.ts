@@ -34,6 +34,7 @@ export interface FilterOptions {
   platforms: string[];
   region: string;
   duration?: "short" | "medium" | "long";
+  animeOnly?: boolean;
 }
 
 export interface StreamingPlatform {

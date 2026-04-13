@@ -15,6 +15,7 @@ export default function Home() {
     genres: [],
     platforms: [],
     region: "BR",
+    animeOnly: false,
   });
   const [error, setError] = useState<string | null>(null);
   const [isAboutOpen, setIsAboutOpen] = useState(false);
@@ -33,6 +34,7 @@ export default function Home() {
         genres: JSON.stringify(filters.genres),
         platforms: JSON.stringify(filters.platforms),
         region: filters.region,
+        animeOnly: String(Boolean(filters.animeOnly)),
       });
 
       if (filters.duration) {
