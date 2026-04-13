@@ -5,15 +5,9 @@ import React, { useEffect, useState } from "react";
 
 interface ContentCardProps {
   content: any;
-  onSortearAgain: () => void;
-  isLoading?: boolean;
 }
 
-export function ContentCard({
-  content,
-  onSortearAgain,
-  isLoading,
-}: ContentCardProps) {
+export function ContentCard({ content }: ContentCardProps) {
   const [isSynopsisExpanded, setIsSynopsisExpanded] = useState(false);
 
   useEffect(() => {
@@ -49,11 +43,11 @@ export function ContentCard({
     : `${content.number_of_seasons || 0} temporadas • ${content.number_of_episodes || 0} episódios`;
 
   return (
-    <div className="bg-dark rounded-xl border border-primary/20 overflow-hidden shadow-2xl">
+    <div className="rounded-2xl border border-violet-300/20 bg-gradient-to-b from-violet-500/10 to-black/45 backdrop-blur-md overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.45)]">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6">
         {/* Pôster */}
         <div className="md:col-span-1 flex justify-center">
-          <div className="relative w-full max-w-xs rounded-xl overflow-hidden shadow-lg ring-1 ring-white/10">
+          <div className="relative w-full max-w-xs rounded-2xl overflow-hidden shadow-lg ring-1 ring-violet-200/20">
             <Image
               src={posterPath}
               alt={title}
@@ -66,22 +60,22 @@ export function ContentCard({
         </div>
 
         {/* Informações */}
-        <div className="md:col-span-2 flex flex-col justify-between">
+        <div className="md:col-span-2">
           <div>
             <div className="flex items-center gap-3 mb-3">
               <h2 className="text-3xl font-bold text-white break-words">
                 {title || "Título não disponível"}
               </h2>
-              <span className="px-3 py-1 bg-primary/20 border border-primary text-primary rounded-full text-sm font-medium whitespace-nowrap">
+              <span className="px-3 py-1 bg-violet-500/15 border border-violet-300/40 text-violet-200 rounded-full text-sm font-medium whitespace-nowrap">
                 {isMovie ? "Filme" : "Série"}
               </span>
             </div>
 
             <div className="flex flex-wrap gap-2 mb-5">
-              <span className="rounded-full bg-gray-800 px-3 py-1 text-xs text-gray-200 border border-gray-700">
+              <span className="rounded-full bg-black/40 px-3 py-1 text-xs text-gray-200 border border-violet-300/20">
                 {year || "Ano não informado"}
               </span>
-              <span className="rounded-full bg-gray-800 px-3 py-1 text-xs text-gray-200 border border-gray-700">
+              <span className="rounded-full bg-black/40 px-3 py-1 text-xs text-gray-200 border border-violet-300/20">
                 {duration}
               </span>
               {typeof content.vote_average === "number" && (
@@ -100,7 +94,7 @@ export function ContentCard({
                   {genresList.map((genre: any) => (
                     <span
                       key={genre.id}
-                      className="rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-xs text-primary"
+                      className="rounded-full border border-violet-300/30 bg-violet-500/15 px-3 py-1 text-xs text-violet-200"
                     >
                       {genre.name}
                     </span>
@@ -111,7 +105,7 @@ export function ContentCard({
               )}
             </div>
 
-            <div className="mb-6">
+            <div className="mb-6 rounded-xl border border-violet-300/15 bg-black/25 p-4">
               <h4 className="text-sm font-semibold text-gray-300 mb-2">
                 Sinopse
               </h4>
@@ -121,7 +115,7 @@ export function ContentCard({
                   <button
                     type="button"
                     onClick={() => setIsSynopsisExpanded((prev) => !prev)}
-                    className="ml-2 text-primary hover:text-purple-300 font-semibold underline underline-offset-2"
+                    className="ml-2 text-violet-300 hover:text-violet-200 font-semibold underline underline-offset-2"
                   >
                     {isSynopsisExpanded ? "Ver menos" : "Ver mais"}
                   </button>
@@ -139,7 +133,7 @@ export function ContentCard({
                   {content.providers.map((provider: any) => (
                     <div
                       key={provider.provider_id}
-                      className="flex items-center gap-2 bg-gray-800 px-3 py-2 rounded-lg border border-gray-700"
+                      className="flex items-center gap-2 bg-black/35 px-3 py-2 rounded-lg border border-violet-300/20"
                     >
                       {provider.logo_path && (
                         <Image
@@ -160,13 +154,6 @@ export function ContentCard({
             )}
           </div>
 
-          <button
-            onClick={onSortearAgain}
-            disabled={isLoading}
-            className="w-full bg-gradient-to-r from-primary to-purple-400 hover:from-primary/80 hover:to-purple-400/80 disabled:from-gray-500 disabled:to-gray-600 text-white font-bold py-3 px-6 rounded-lg transition-all disabled:opacity-50"
-          >
-            {isLoading ? "Carregando..." : "Sortear Novamente"}
-          </button>
         </div>
       </div>
     </div>

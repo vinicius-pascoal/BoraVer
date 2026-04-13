@@ -99,11 +99,7 @@ export default function Home() {
               )}
 
               {content ? (
-                <ContentCard
-                  content={content}
-                  onSortearAgain={fetchRandomContent}
-                  isLoading={isLoading}
-                />
+                <ContentCard content={content} />
               ) : (
                 <div className="bg-dark rounded-lg border border-primary/20 p-12 text-center">
                   <p className="text-gray-400 text-lg mb-4">
