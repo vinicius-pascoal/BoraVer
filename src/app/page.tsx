@@ -120,7 +120,7 @@ export default function Home() {
               )}
 
               {content ? (
-                <ContentCard content={content} />
+                <ContentCard key={`${content.media_type}-${content.id}`} content={content} />
               ) : (
                 <div className="bg-dark rounded-lg border border-primary/20 p-12 text-center">
                   <p className="text-gray-400 text-lg mb-4">

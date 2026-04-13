@@ -43,10 +43,10 @@ export function ContentCard({ content }: ContentCardProps) {
     : `${content.number_of_seasons || 0} temporadas • ${content.number_of_episodes || 0} episódios`;
 
   return (
-    <div className="rounded-2xl border border-violet-300/20 bg-gradient-to-b from-violet-500/10 to-black/45 backdrop-blur-md overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.45)]">
+    <div className="result-reveal-card rounded-2xl border border-violet-300/20 bg-gradient-to-b from-violet-500/10 to-black/45 backdrop-blur-md overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.45)]">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6">
         {/* Pôster */}
-        <div className="md:col-span-1 flex justify-center">
+        <div className="md:col-span-1 flex justify-center result-reveal-item result-delay-1">
           <div className="relative w-full max-w-xs rounded-2xl overflow-hidden shadow-lg ring-1 ring-violet-200/20">
             <Image
               src={posterPath}
@@ -61,7 +61,7 @@ export function ContentCard({ content }: ContentCardProps) {
 
         {/* Informações */}
         <div className="md:col-span-2">
-          <div>
+          <div className="result-reveal-item result-delay-1">
             <div className="flex items-center gap-3 mb-3">
               <h2 className="text-3xl font-bold text-white break-words">
                 {title || "Título não disponível"}
@@ -71,7 +71,7 @@ export function ContentCard({ content }: ContentCardProps) {
               </span>
             </div>
 
-            <div className="flex flex-wrap gap-2 mb-5">
+            <div className="flex flex-wrap gap-2 mb-5 result-reveal-item result-delay-2">
               <span className="rounded-full bg-black/40 px-3 py-1 text-xs text-gray-200 border border-violet-300/20">
                 {year || "Ano não informado"}
               </span>
@@ -85,7 +85,7 @@ export function ContentCard({ content }: ContentCardProps) {
               )}
             </div>
 
-            <div className="mb-4">
+            <div className="mb-4 result-reveal-item result-delay-2">
               <h4 className="text-sm font-semibold text-gray-300 mb-2">
                 Gêneros
               </h4>
@@ -105,7 +105,7 @@ export function ContentCard({ content }: ContentCardProps) {
               )}
             </div>
 
-            <div className="mb-6 rounded-xl border border-violet-300/15 bg-black/25 p-4">
+            <div className="synopsis-scroll mb-6 rounded-xl border border-violet-300/15 bg-black/25 p-4 result-reveal-item result-delay-3 max-h-48 overflow-y-auto pr-2">
               <h4 className="text-sm font-semibold text-gray-300 mb-2">
                 Sinopse
               </h4>
@@ -125,7 +125,7 @@ export function ContentCard({ content }: ContentCardProps) {
 
             {/* Plataformas */}
             {content.providers && content.providers.length > 0 && (
-              <div className="mb-6">
+              <div className="mb-6 result-reveal-item result-delay-4">
                 <h4 className="text-sm font-semibold text-gray-300 mb-2">
                   Disponível em:
                 </h4>

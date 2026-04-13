@@ -23,3 +23,89 @@ body {
 .container {
   @apply max-w-7xl mx-auto px-4;
 }
+
+@keyframes cardReveal {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.985);
+    filter: blur(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes contentReveal {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.result-reveal-card {
+  animation: cardReveal 0.55s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+.result-reveal-item {
+  opacity: 0;
+  animation: contentReveal 0.45s ease-out both;
+}
+
+.result-delay-1 {
+  animation-delay: 0.1s;
+}
+
+.result-delay-2 {
+  animation-delay: 0.18s;
+}
+
+.result-delay-3 {
+  animation-delay: 0.26s;
+}
+
+.result-delay-4 {
+  animation-delay: 0.34s;
+}
+
+.synopsis-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(167, 139, 250, 0.7) rgba(14, 8, 20, 0.55);
+}
+
+.synopsis-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.synopsis-scroll::-webkit-scrollbar-track {
+  background: rgba(14, 8, 20, 0.55);
+  border-radius: 9999px;
+}
+
+.synopsis-scroll::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(192, 132, 252, 0.9) 0%, rgba(139, 92, 246, 0.9) 100%);
+  border-radius: 9999px;
+  border: 1px solid rgba(221, 214, 254, 0.35);
+}
+
+.synopsis-scroll::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgba(216, 180, 254, 0.95) 0%, rgba(167, 139, 250, 0.95) 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .result-reveal-card,
+  .result-reveal-item {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}
