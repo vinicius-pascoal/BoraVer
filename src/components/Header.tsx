@@ -18,7 +18,7 @@ export function Header() {
           />
         </div>
 
-        <div className="mt-3 text-center sm:text-left">
+        <div className="mt-3 ml-auto text-center sm:text-right">
           <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent">
             Descubra o que assistir
           </h1>

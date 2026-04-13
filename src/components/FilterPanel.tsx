@@ -112,7 +112,7 @@ export function FilterPanel({ onFiltersChange, isLoading }: FilterProps) {
   };
 
   return (
-    <div className="bg-dark rounded-xl border border-primary/20 p-4 space-y-4 shadow-xl">
+    <div className="rounded-2xl border border-violet-300/20 bg-gradient-to-b from-violet-500/10 to-black/45 backdrop-blur-md p-4 space-y-4 shadow-[0_12px_40px_rgba(0,0,0,0.45)]">
       <div className="flex items-start justify-between gap-3">
         <div>
           <h3 className="text-lg font-semibold text-white">Filtros</h3>
@@ -122,7 +122,7 @@ export function FilterPanel({ onFiltersChange, isLoading }: FilterProps) {
         </div>
 
         <div className="text-right">
-          <span className="inline-flex items-center rounded-full border border-primary/50 bg-primary/15 px-3 py-1 text-xs font-semibold text-primary">
+          <span className="inline-flex items-center rounded-full border border-violet-300/40 bg-violet-500/15 px-3 py-1 text-xs font-semibold text-violet-200">
             {selectedCount} selecionado{selectedCount === 1 ? "" : "s"}
           </span>
           {selectedCount > 0 && (
@@ -148,7 +148,7 @@ export function FilterPanel({ onFiltersChange, isLoading }: FilterProps) {
               handleTypeChange(e.target.value as "movie" | "tv" | "both")
             }
             disabled={isLoading}
-            className="w-full rounded-lg border border-gray-700 bg-gray-900 px-3 py-2 text-sm text-white outline-none transition focus:border-primary disabled:opacity-50"
+            className="w-full rounded-xl border border-violet-300/20 bg-black/40 px-3 py-2 text-sm text-white outline-none transition focus:border-violet-300 focus:ring-2 focus:ring-violet-400/30 disabled:opacity-50"
           >
             <option value="both">Filmes e Séries</option>
             <option value="movie">Apenas Filmes</option>
@@ -170,7 +170,7 @@ export function FilterPanel({ onFiltersChange, isLoading }: FilterProps) {
               )
             }
             disabled={isLoading || filters.type === "tv"}
-            className="w-full rounded-lg border border-gray-700 bg-gray-900 px-3 py-2 text-sm text-white outline-none transition focus:border-primary disabled:opacity-50"
+            className="w-full rounded-xl border border-violet-300/20 bg-black/40 px-3 py-2 text-sm text-white outline-none transition focus:border-violet-300 focus:ring-2 focus:ring-violet-400/30 disabled:opacity-50"
           >
             <option value="">Qualquer duração</option>
             {DURATIONS.map((duration) => (
@@ -182,25 +182,25 @@ export function FilterPanel({ onFiltersChange, isLoading }: FilterProps) {
         </label>
       </div>
 
-      <details className="rounded-lg border border-gray-700 bg-gray-900/60 group">
-        <summary className="cursor-pointer list-none px-3 py-2 text-sm text-white flex items-center justify-between">
+      <details className="rounded-xl border border-violet-300/20 bg-black/35 group overflow-hidden">
+        <summary className="cursor-pointer list-none px-3 py-2 text-sm text-white flex items-center justify-between bg-gradient-to-r from-violet-500/10 to-transparent">
           <span className="font-medium">Gêneros</span>
           <span className="text-xs text-gray-400 max-w-[70%] truncate text-right">
             {filters.genres.length > 0 ? selectedGenreNames : "Todos"}
           </span>
         </summary>
-        <div className="px-3 pb-3 pt-1 grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-52 overflow-auto border-t border-gray-800">
+        <div className="px-3 pb-3 pt-2 grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-52 overflow-auto border-t border-violet-300/10">
           {GENRES.map((genre) => (
             <label
               key={genre.id}
-              className="flex items-center gap-2 rounded-md px-2 py-1 text-sm text-gray-200 hover:bg-gray-800"
+              className="flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm text-gray-200 hover:bg-violet-500/10"
             >
               <input
                 type="checkbox"
                 checked={filters.genres.includes(genre.id)}
                 onChange={() => handleGenreToggle(genre.id)}
                 disabled={isLoading}
-                className="h-4 w-4 accent-violet-500"
+                className="h-4 w-4 accent-violet-400"
               />
               <span>{genre.name}</span>
             </label>
@@ -208,25 +208,25 @@ export function FilterPanel({ onFiltersChange, isLoading }: FilterProps) {
         </div>
       </details>
 
-      <details className="rounded-lg border border-gray-700 bg-gray-900/60 group">
-        <summary className="cursor-pointer list-none px-3 py-2 text-sm text-white flex items-center justify-between">
+      <details className="rounded-xl border border-violet-300/20 bg-black/35 group overflow-hidden">
+        <summary className="cursor-pointer list-none px-3 py-2 text-sm text-white flex items-center justify-between bg-gradient-to-r from-violet-500/10 to-transparent">
           <span className="font-medium">Plataformas</span>
           <span className="text-xs text-gray-400 max-w-[70%] truncate text-right">
             {filters.platforms.length > 0 ? selectedPlatforms : "Todas"}
           </span>
         </summary>
-        <div className="px-3 pb-3 pt-1 grid grid-cols-1 sm:grid-cols-2 gap-2 border-t border-gray-800">
+        <div className="px-3 pb-3 pt-2 grid grid-cols-1 sm:grid-cols-2 gap-2 border-t border-violet-300/10">
           {PLATFORMS.map((platform) => (
             <label
               key={platform}
-              className="flex items-center gap-2 rounded-md px-2 py-1 text-sm text-gray-200 hover:bg-gray-800"
+              className="flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm text-gray-200 hover:bg-violet-500/10"
             >
               <input
                 type="checkbox"
                 checked={filters.platforms.includes(platform)}
                 onChange={() => handlePlatformToggle(platform)}
                 disabled={isLoading}
-                className="h-4 w-4 accent-violet-500"
+                className="h-4 w-4 accent-violet-400"
               />
               <span>{platform}</span>
             </label>
