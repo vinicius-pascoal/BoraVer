@@ -6,6 +6,11 @@ export const metadata: Metadata = {
   description:
     "Descubra rapidamente um filme ou série para assistir com base em seus filtros preferidos.",
   keywords: ["filme", "série", "sorteio", "streaming", "diversão"],
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico",
+  },
 };
 
 export const viewport: Viewport = {
