@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="300" height="450" viewBox="0 0 300 450" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="300" height="450" fill="#1a1a1a"/>
+  <rect x="1" y="1" width="298" height="448" fill="none" stroke="#333" stroke-width="2"/>
+  <circle cx="150" cy="180" r="50" fill="#8b5cf6" opacity="0.3"/>
+  <path d="M100 280L150 220L200 280H100Z" fill="#8b5cf6" opacity="0.3"/>
+  <text x="150" y="360" font-family="Arial" font-size="18" fill="#666" text-anchor="middle">Sem Pôster</text>
+  <text x="150" y="390" font-family="Arial" font-size="14" fill="#555" text-anchor="middle">Disponível</text>
+</svg>
