@@ -114,11 +114,12 @@ export function ContentCard({ content }: ContentCardProps) {
               )}
             </div>
 
-            <div className="synopsis-scroll mb-6 rounded-xl border border-violet-300/15 bg-black/25 p-4 result-reveal-item result-delay-3 max-h-48 overflow-y-auto pr-2">
+            <div className="synopsis-scroll mb-6 rounded-xl border border-violet-300/15 bg-black/25 p-4 result-reveal-item result-delay-3 max-h-none overflow-visible md:max-h-48 md:overflow-y-auto pr-2">
               <h4 className="text-sm font-semibold text-gray-300 mb-2">
                 Sinopse
               </h4>
-              <p className="text-gray-300 leading-relaxed">
+              <p className="text-gray-300 leading-relaxed md:hidden">{synopsis}</p>
+              <p className="hidden text-gray-300 leading-relaxed md:block">
                 {isLongSynopsis ? visibleSynopsis : synopsis}
                 {isLongSynopsis && (
                   <button
