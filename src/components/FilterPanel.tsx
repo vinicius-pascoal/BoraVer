@@ -148,89 +148,97 @@ export function FilterPanel({ onFiltersChange, isLoading }: FilterProps) {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        <label className="space-y-1">
-          <span className="text-xs font-semibold uppercase tracking-wide text-gray-300">
+        <label className="space-y-1.5">
+          <span className="text-xs font-semibold uppercase tracking-[0.14em] text-violet-100/90">
             Tipo
           </span>
-          <select
-            value={filters.type}
-            onChange={(e) =>
-              handleTypeChange(e.target.value as "movie" | "tv" | "both")
-            }
-            disabled={isLoading}
-            className="w-full rounded-xl border border-violet-300/20 bg-black/40 px-3 py-2 text-sm text-white outline-none transition focus:border-violet-300 focus:ring-2 focus:ring-violet-400/30 disabled:opacity-50"
-          >
-            <option value="both">Filmes e Séries</option>
-            <option value="movie">Apenas Filmes</option>
-            <option value="tv">Apenas Séries</option>
-          </select>
+          <div className="filter-select-shell">
+            <span className="filter-select-icon" aria-hidden="true">
+              🎬
+            </span>
+            <select
+              value={filters.type}
+              onChange={(e) =>
+                handleTypeChange(e.target.value as "movie" | "tv" | "both")
+              }
+              disabled={isLoading}
+              className="filter-select"
+            >
+              <option value="both">Filmes e Séries</option>
+              <option value="movie">Apenas Filmes</option>
+              <option value="tv">Apenas Séries</option>
+            </select>
+          </div>
         </label>
 
-        <label className="space-y-1">
-          <span className="text-xs font-semibold uppercase tracking-wide text-gray-300">
+        <label className="space-y-1.5">
+          <span className="text-xs font-semibold uppercase tracking-[0.14em] text-violet-100/90">
             Duração
           </span>
-          <select
-            value={filters.duration || ""}
-            onChange={(e) =>
-              handleDurationChange(
-                e.target.value === ""
-                  ? undefined
-                  : (e.target.value as "short" | "medium" | "long")
-              )
-            }
-            disabled={isLoading || filters.type === "tv"}
-            className="w-full rounded-xl border border-violet-300/20 bg-black/40 px-3 py-2 text-sm text-white outline-none transition focus:border-violet-300 focus:ring-2 focus:ring-violet-400/30 disabled:opacity-50"
-          >
-            <option value="">Qualquer duração</option>
-            {DURATIONS.map((duration) => (
-              <option key={duration.value} value={duration.value}>
-                {duration.label}
-              </option>
-            ))}
-          </select>
+          <div className="filter-select-shell">
+            <span className="filter-select-icon" aria-hidden="true">
+              ⏱
+            </span>
+            <select
+              value={filters.duration || ""}
+              onChange={(e) =>
+                handleDurationChange(
+                  e.target.value === ""
+                    ? undefined
+                    : (e.target.value as "short" | "medium" | "long")
+                )
+              }
+              disabled={isLoading || filters.type === "tv"}
+              className="filter-select"
+            >
+              <option value="">Qualquer duração</option>
+              {DURATIONS.map((duration) => (
+                <option key={duration.value} value={duration.value}>
+                  {duration.label}
+                </option>
+              ))}
+            </select>
+          </div>
         </label>
 
-        <label className="sm:col-span-2 flex items-center justify-between rounded-xl border border-violet-300/20 bg-black/40 px-3 py-2">
-          <span className="text-xs font-semibold uppercase tracking-wide text-gray-300">
-            Somente anime
-          </span>
+        <label className="filter-control-card sm:col-span-2">
+          <span className="filter-control-label">Somente anime</span>
           <button
             type="button"
             role="switch"
             aria-checked={Boolean(filters.animeOnly)}
             onClick={handleAnimeToggle}
             disabled={isLoading}
-            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors disabled:opacity-50 ${filters.animeOnly ? "bg-violet-500" : "bg-gray-700"
+            className={`filter-toggle ${filters.animeOnly ? "filter-toggle-on" : "filter-toggle-off"
               }`}
           >
             <span
-              className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${filters.animeOnly ? "translate-x-6" : "translate-x-1"
+              className={`filter-toggle-dot ${filters.animeOnly ? "translate-x-6" : "translate-x-1"
                 }`}
             />
           </button>
         </label>
       </div>
 
-      <details className="rounded-xl border border-violet-300/20 bg-black/35 group overflow-hidden">
-        <summary className="cursor-pointer list-none px-3 py-2 text-sm text-white flex items-center justify-between bg-gradient-to-r from-violet-500/10 to-transparent">
-          <span className="font-medium">Gêneros</span>
-          <span className="text-xs text-gray-400 max-w-[70%] truncate text-right">
+      <details className="filter-section group overflow-hidden">
+        <summary className="filter-section-summary">
+          <span className="filter-section-title">Gêneros</span>
+          <span className="filter-section-selected">
             {filters.genres.length > 0 ? selectedGenreNames : "Todos"}
           </span>
         </summary>
-        <div className="filters-scroll px-3 pb-3 pt-2 grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-52 overflow-y-auto border-t border-violet-300/10">
+        <div className="filters-scroll filter-section-body max-h-52 overflow-y-auto">
           {GENRES.map((genre) => (
             <label
               key={genre.id}
-              className="flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm text-gray-200 hover:bg-violet-500/10"
+              className="filter-list-item"
             >
               <input
                 type="checkbox"
                 checked={filters.genres.includes(genre.id)}
                 onChange={() => handleGenreToggle(genre.id)}
                 disabled={isLoading}
-                className="h-4 w-4 accent-violet-400"
+                className="filter-check"
               />
               <span>{genre.name}</span>
             </label>
@@ -238,25 +246,25 @@ export function FilterPanel({ onFiltersChange, isLoading }: FilterProps) {
         </div>
       </details>
 
-      <details className="rounded-xl border border-violet-300/20 bg-black/35 group overflow-hidden">
-        <summary className="cursor-pointer list-none px-3 py-2 text-sm text-white flex items-center justify-between bg-gradient-to-r from-violet-500/10 to-transparent">
-          <span className="font-medium">Plataformas</span>
-          <span className="text-xs text-gray-400 max-w-[70%] truncate text-right">
+      <details className="filter-section group overflow-hidden">
+        <summary className="filter-section-summary">
+          <span className="filter-section-title">Plataformas</span>
+          <span className="filter-section-selected">
             {filters.platforms.length > 0 ? selectedPlatforms : "Todas"}
           </span>
         </summary>
-        <div className="filters-scroll px-3 pb-3 pt-2 grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-44 overflow-y-auto border-t border-violet-300/10">
+        <div className="filters-scroll filter-section-body max-h-44 overflow-y-auto">
           {PLATFORMS.map((platform) => (
             <label
               key={platform}
-              className="flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm text-gray-200 hover:bg-violet-500/10"
+              className="filter-list-item"
             >
               <input
                 type="checkbox"
                 checked={filters.platforms.includes(platform)}
                 onChange={() => handlePlatformToggle(platform)}
                 disabled={isLoading}
-                className="h-4 w-4 accent-violet-400"
+                className="filter-check"
               />
               <span>{platform}</span>
             </label>
