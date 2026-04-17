@@ -29,8 +29,13 @@ export function ContentCard({ content }: ContentCardProps) {
     ? content.release_date?.split("-")[0]
     : content.first_air_date?.split("-")[0];
 
-  const posterPath = content.poster_path
-    ? `${process.env.NEXT_PUBLIC_TMDB_IMAGE_BASE_URL}${content.poster_path}`
+  const tmdbImageBaseUrl =
+    process.env.NEXT_PUBLIC_TMDB_IMAGE_BASE_URL ||
+    "https://image.tmdb.org/t/p/w500";
+  const rawPosterPath =
+    typeof content.poster_path === "string" ? content.poster_path.trim() : "";
+  const posterPath = rawPosterPath
+    ? `${tmdbImageBaseUrl.replace(/\/$/, "")}/${rawPosterPath.replace(/^\//, "")}`
     : "/no-poster.svg";
 
   const genres = content.genres?.map((g: any) => g.name).join(", ") || "N/A";
@@ -51,15 +56,17 @@ export function ContentCard({ content }: ContentCardProps) {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6">
         {/* Pôster */}
         <div className="md:col-span-1 flex justify-center items-start self-start result-reveal-item result-delay-1">
-          <div className="relative inline-block w-fit h-fit max-w-full rounded-2xl overflow-hidden shadow-lg ring-1 ring-violet-200/20">
-            <Image
-              src={posterPath}
-              alt={title}
-              width={300}
-              height={450}
-              className="w-[300px] max-w-full h-auto object-cover"
-              priority
-            />
+          <div className="poster-hover-shell relative inline-block w-fit h-fit max-w-full rounded-2xl">
+            <div className="poster-hover-card relative rounded-2xl overflow-hidden shadow-lg ring-1 ring-violet-200/20">
+              <Image
+                src={posterPath}
+                alt={title}
+                width={300}
+                height={450}
+                className="w-[300px] max-w-full h-auto object-cover"
+                priority
+              />
+            </div>
           </div>
         </div>
 
