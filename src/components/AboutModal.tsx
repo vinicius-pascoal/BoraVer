@@ -42,10 +42,10 @@ export function AboutModal({ isOpen, onClose }: AboutModalProps) {
       aria-labelledby="about-modal-title"
       onClick={onClose}
     >
-      <div className="absolute inset-0 bg-gray-900/70 backdrop-blur-sm" />
+      <div className="absolute inset-0 bg-black/85 backdrop-blur-sm" />
 
       <div
-        className="relative w-full max-w-xl rounded-2xl border border-gray-300/25 bg-gradient-to-b from-gray-500/20 to-gray-900/85 p-6 shadow-[0_20px_60px_rgba(0,0,0,0.55)]"
+        className="relative w-full max-w-xl rounded-2xl border border-violet-200/20 bg-[#0d0a14]/95 p-6 shadow-[0_20px_60px_rgba(0,0,0,0.65)]"
         onClick={(event) => event.stopPropagation()}
       >
         <div className="flex items-start justify-between gap-4">
@@ -53,7 +53,7 @@ export function AboutModal({ isOpen, onClose }: AboutModalProps) {
             <h2 id="about-modal-title" className="text-2xl font-bold text-white">
               Sobre o BoraVer
             </h2>
-            <p className="text-sm text-gray-300 mt-1">
+            <p className="mt-1 text-sm text-violet-100/85">
               Descubra filmes e series sem perder tempo escolhendo.
             </p>
           </div>
@@ -62,13 +62,13 @@ export function AboutModal({ isOpen, onClose }: AboutModalProps) {
             type="button"
             onClick={onClose}
             aria-label="Fechar modal"
-            className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-gray-300/35 bg-gray-900/50 text-gray-100 hover:bg-gray-700/60 transition-colors"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-violet-200/30 bg-white/10 text-gray-100 transition-colors hover:bg-white/20"
           >
             X
           </button>
         </div>
 
-        <div className="mt-5 space-y-4 text-sm leading-relaxed text-gray-200">
+        <div className="mt-5 space-y-4 rounded-xl border border-white/10 bg-black/20 p-4 text-sm leading-relaxed text-gray-100">
           <p>
             O BoraVer nasceu para resolver um problema simples: abrir os streamings,
             passar varios minutos escolhendo e, no fim, nao assistir nada.
@@ -77,13 +77,13 @@ export function AboutModal({ isOpen, onClose }: AboutModalProps) {
             Com poucos filtros, voce recebe uma sugestao rapida com poster, sinopse,
             genero, duracao e plataformas disponiveis, tudo em uma unica tela.
           </p>
-          <p className="text-gray-200 font-medium">
+          <p className="font-medium text-violet-100">
             Desenvolvido por:{" "}
             <Link
               href="https://github.com/vinicius-pascoal"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-violet-300 hover:text-violet-200 underline underline-offset-2"
+              className="text-violet-200 underline underline-offset-2 hover:text-violet-100"
             >
               Vinicius Pascoal
             </Link>
@@ -94,7 +94,7 @@ export function AboutModal({ isOpen, onClose }: AboutModalProps) {
           <button
             type="button"
             onClick={onClose}
-            className="rounded-xl border border-violet-300/35 bg-gradient-to-r from-violet-500/80 to-purple-500/80 px-4 py-2 text-sm font-semibold text-white hover:from-violet-400 hover:to-purple-400 transition-all"
+            className="rounded-xl border border-violet-300/45 bg-gradient-to-r from-violet-500 to-purple-500 px-4 py-2 text-sm font-semibold text-white transition-all hover:from-violet-400 hover:to-purple-400"
           >
             Entendi
           </button>
