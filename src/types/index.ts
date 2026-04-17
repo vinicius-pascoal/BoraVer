@@ -43,6 +43,15 @@ export interface StreamingPlatform {
   logo_path: string | null;
 }
 
+export interface TrailerInfo {
+  key: string;
+  name: string;
+  site: string;
+  type: string;
+  official: boolean;
+}
+
 export type ContentWithPlatforms = (Movie | TV) & {
   streaming_platforms?: StreamingPlatform[];
+  trailer?: TrailerInfo | null;
 };

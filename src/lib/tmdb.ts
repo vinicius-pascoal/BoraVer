@@ -68,13 +68,13 @@ export async function getRandomContent(filters: {
     const randomContent = results[Math.floor(Math.random() * results.length)];
 
     // Buscar informações de plataformas disponíveis
-    const withPlatforms = await getAvailablePlatforms(
+    const withDetails = await getAvailableDetails(
       randomContent.id,
       randomContent.media_type,
       region
     );
 
-    return withPlatforms;
+    return withDetails;
   } catch (error) {
     console.error("Error fetching random content:", error);
     throw error;
@@ -170,40 +170,48 @@ async function discoverContent(
   return [];
 }
 
-async function getAvailablePlatforms(
+async function getAvailableDetails(
   contentId: number,
   mediaType: "movie" | "tv",
   region: string
 ) {
   try {
-    const response = await fetch(
-      `${TMDB_BASE_URL}/${mediaType}/${contentId}?api_key=${TMDB_API_KEY}&language=pt-BR`,
-      {
-        cache: "no-store",
-      }
-    );
+    const [detailsResponse, watchResponse, videosResponse] = await Promise.all([
+      fetch(
+        `${TMDB_BASE_URL}/${mediaType}/${contentId}?api_key=${TMDB_API_KEY}&language=pt-BR`,
+        {
+          cache: "no-store",
+        }
+      ),
+      fetch(
+        `${TMDB_BASE_URL}/${mediaType}/${contentId}/watch/providers?api_key=${TMDB_API_KEY}`,
+        {
+          cache: "no-store",
+        }
+      ),
+      fetch(
+        `${TMDB_BASE_URL}/${mediaType}/${contentId}/videos?api_key=${TMDB_API_KEY}&language=pt-BR`,
+        {
+          cache: "no-store",
+        }
+      ),
+    ]);
 
-    if (!response.ok) {
+    if (!detailsResponse.ok) {
       throw new Error(`Failed to fetch ${mediaType} details`);
     }
 
-    const details = await response.json();
-
-    // Buscar informações de "watch providers"
-    const watchResponse = await fetch(
-      `${TMDB_BASE_URL}/${mediaType}/${contentId}/watch/providers?api_key=${TMDB_API_KEY}`,
-      {
-        cache: "no-store",
-      }
-    );
-
+    const details = await detailsResponse.json();
     const watchData = watchResponse.ok ? await watchResponse.json() : {};
+    const videosData = videosResponse.ok ? await videosResponse.json() : {};
     const regionData = watchData.results?.[region] || {};
+    const trailer = pickTrailer(videosData.results || []);
 
     return {
       ...details,
       media_type: mediaType,
       providers: regionData.flatrate || [],
+      trailer,
     };
   } catch (error) {
     console.error("Error fetching platforms:", error);
@@ -211,8 +219,37 @@ async function getAvailablePlatforms(
       id: contentId,
       media_type: mediaType,
       providers: [],
+      trailer: null,
     };
   }
+}
+
+function pickTrailer(videos: Array<any>) {
+  const youtubeTrailers = videos.filter(
+    (video) => video?.site === "YouTube" && video?.key
+  );
+
+  const officialTrailer = youtubeTrailers.find(
+    (video) => video?.official && video?.type === "Trailer"
+  );
+
+  const fallbackTrailer = youtubeTrailers.find(
+    (video) => video?.type === "Trailer"
+  );
+
+  const selected = officialTrailer || fallbackTrailer || youtubeTrailers[0];
+
+  if (!selected) {
+    return null;
+  }
+
+  return {
+    key: selected.key,
+    name: selected.name || "Trailer",
+    site: selected.site,
+    type: selected.type,
+    official: Boolean(selected.official),
+  };
 }
 
 export function getGenreId(genreName: string): number | undefined {
