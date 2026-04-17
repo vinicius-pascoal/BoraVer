@@ -1,6 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Ceviche+One&family=Kavoon&family=Pixelify+Sans:wght@400..700&family=Tiny5&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --font-body: "Pixelify Sans", "Trebuchet MS", sans-serif;
+  --font-heading: "Kavoon", "Times New Roman", serif;
+  --font-accent: "Ceviche One", "Brush Script MT", cursive;
+  --font-ui: "Tiny5", "Courier New", monospace;
+}
 
 * {
   margin: 0;
@@ -13,11 +22,28 @@ html {
 }
 
 body {
-  @apply text-white font-sans;
+  @apply text-white;
+  font-family: var(--font-body);
+  letter-spacing: 0.01em;
   background: radial-gradient(circle at 20% 10%, rgba(139, 92, 246, 0.35), transparent 35%),
     radial-gradient(circle at 80% 20%, rgba(124, 58, 237, 0.25), transparent 30%),
     linear-gradient(165deg, #140816 0%, #09060d 45%, #000000 100%);
   background-attachment: fixed;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-heading);
+  letter-spacing: 0.02em;
+}
+
+.font-accent {
+  font-family: var(--font-accent);
+}
+
+.font-ui {
+  font-family: var(--font-ui);
 }
 
 .container {
