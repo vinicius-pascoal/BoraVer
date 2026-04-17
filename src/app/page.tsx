@@ -123,7 +123,21 @@ export default function Home() {
                 </div>
               )}
 
-              {content ? (
+              {isLoading ? (
+                <div className="sorting-card rounded-2xl border border-violet-300/25 bg-gradient-to-b from-violet-500/10 to-black/45 p-10 text-center shadow-[0_12px_40px_rgba(0,0,0,0.45)]">
+                  <div className="sorting-orbit mb-5" aria-hidden="true">
+                    <span className="sorting-dot sorting-dot-1" />
+                    <span className="sorting-dot sorting-dot-2" />
+                    <span className="sorting-dot sorting-dot-3" />
+                  </div>
+                  <p className="text-xl font-semibold text-violet-100">
+                    Sorteando sua próxima sessão...
+                  </p>
+                  <p className="mt-2 text-sm text-violet-200/80">
+                    Buscando entre filmes e séries com os filtros selecionados
+                  </p>
+                </div>
+              ) : content ? (
                 <ContentCard key={`${content.media_type}-${content.id}`} content={content} />
               ) : (
                 <div className="bg-dark rounded-lg border border-primary/20 p-12 text-center">
