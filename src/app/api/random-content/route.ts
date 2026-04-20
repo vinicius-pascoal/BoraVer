@@ -36,13 +36,13 @@ export async function GET(request: NextRequest) {
     const content = await getRandomContent(filters);
 
     if (!content) {
-      return NextResponse.json(
-        { error: "No content found with the given filters" },
-        { status: 404 }
-      );
+      return NextResponse.json({
+        content: null,
+        error: "Não encontramos nada com esses filtros. Tente novamente!",
+      });
     }
 
-    return NextResponse.json(content);
+    return NextResponse.json({ content });
   } catch (error) {
     console.error("Error in /api/random-content:", error);
     return NextResponse.json(

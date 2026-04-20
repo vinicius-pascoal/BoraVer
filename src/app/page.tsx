@@ -42,6 +42,7 @@ export default function Home() {
       }
 
       const response = await fetch(`/api/random-content?${params.toString()}`);
+      const data = await response.json();
 
       if (!response.ok) {
         throw new Error(
@@ -49,8 +50,15 @@ export default function Home() {
         );
       }
 
-      const data = await response.json();
-      setContent(data);
+      if (data?.error || !data?.content) {
+        setError(
+          data?.error || "Não encontramos nada com esses filtros. Tente novamente!"
+        );
+        setContent(null);
+        return;
+      }
+
+      setContent(data.content);
     } catch (err) {
       setError(
         err instanceof Error ? err.message : "Erro ao carregar conteúdo"

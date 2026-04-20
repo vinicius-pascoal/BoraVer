@@ -29,7 +29,8 @@ const PLATFORM_MAP: Record<string, number> = {
   max: 445,
   "apple tv+": 350,
   globoplay: 74,
-  crunchyroll: 105,
+  crunchyroll: 283,
+  crunchroll: 283,
   hulu: 15,
 };
 
@@ -98,52 +99,54 @@ async function discoverContent(
       .filter((id: number | undefined): id is number => id !== undefined)
     : [];
 
-  for (let attempt = 0; attempt < 3; attempt++) {
-    const params = new URLSearchParams({
-      api_key: TMDB_API_KEY!,
-      language: "pt-BR",
-      region: region,
-      sort_by: "popularity.desc",
-      page: String(Math.floor(Math.random() * 50) + 1),
-      "vote_average.gte": "5.0",
-      "vote_count.gte": "100",
-      include_adult: "false",
-    });
+  const baseParams = new URLSearchParams({
+    api_key: TMDB_API_KEY!,
+    language: "pt-BR",
+    region: region,
+    sort_by: "popularity.desc",
+    "vote_average.gte": "5.0",
+    "vote_count.gte": "100",
+    include_adult: "false",
+  });
 
-    if (filters.animeOnly) {
-      const selectedGenres = Array.isArray(filters.genres)
-        ? filters.genres.filter((genreId: number) => genreId !== 16)
-        : [];
+  if (filters.animeOnly) {
+    const selectedGenres = Array.isArray(filters.genres)
+      ? filters.genres.filter((genreId: number) => genreId !== 16)
+      : [];
 
-      // Force animation and Japanese original language for anime-focused results.
-      params.append(
-        "with_genres",
-        selectedGenres.length > 0 ? [16, ...selectedGenres].join(",") : "16"
-      );
-      params.append("with_original_language", "ja");
-    } else if (filters.genres && filters.genres.length > 0) {
-      // Use OR between selected genres to avoid over-restrictive searches.
-      params.append("with_genres", filters.genres.join("|"));
+    // Force animation and Japanese original language for anime-focused results.
+    baseParams.append(
+      "with_genres",
+      selectedGenres.length > 0 ? [16, ...selectedGenres].join(",") : "16"
+    );
+    baseParams.append("with_original_language", "ja");
+  } else if (filters.genres && filters.genres.length > 0) {
+    // Use OR between selected genres to avoid over-restrictive searches.
+    baseParams.append("with_genres", filters.genres.join("|"));
+  }
+
+  if (platformIds.length > 0) {
+    // Keep filtering in the selected market and providers.
+    baseParams.append("watch_region", region);
+    baseParams.append("with_watch_providers", platformIds.join("|"));
+    baseParams.append("with_watch_monetization_types", "flatrate");
+  }
+
+  if (filters.duration && mediaType === "movie") {
+    // Filtrar por duração de filme
+    if (filters.duration === "short") {
+      baseParams.append("with_runtime.lte", "90");
+    } else if (filters.duration === "medium") {
+      baseParams.append("with_runtime.gte", "91");
+      baseParams.append("with_runtime.lte", "120");
+    } else if (filters.duration === "long") {
+      baseParams.append("with_runtime.gte", "121");
     }
+  }
 
-    if (platformIds.length > 0) {
-      // Keep filtering in the selected market and providers.
-      params.append("watch_region", region);
-      params.append("with_watch_providers", platformIds.join("|"));
-      params.append("with_watch_monetization_types", "flatrate");
-    }
-
-    if (filters.duration && mediaType === "movie") {
-      // Filtrar por duração de filme
-      if (filters.duration === "short") {
-        params.append("with_runtime.lte", "90");
-      } else if (filters.duration === "medium") {
-        params.append("with_runtime.gte", "91");
-        params.append("with_runtime.lte", "120");
-      } else if (filters.duration === "long") {
-        params.append("with_runtime.gte", "121");
-      }
-    }
+  const fetchDiscoverPage = async (page: number) => {
+    const params = new URLSearchParams(baseParams);
+    params.set("page", String(page));
 
     const response = await fetch(
       `${TMDB_BASE_URL}/discover/${mediaType}?${params.toString()}`,
@@ -156,7 +159,25 @@ async function discoverContent(
       throw new Error(`Failed to fetch ${mediaType} data`);
     }
 
-    const data = await response.json();
+    return response.json();
+  };
+
+  // First page gives us total_pages, preventing random requests to invalid pages.
+  const firstPageData = await fetchDiscoverPage(1);
+  const totalPages = Math.max(
+    1,
+    Math.min(Number(firstPageData?.total_pages || 1), 500)
+  );
+
+  const pagesToTry = new Set<number>([1]);
+  const maxAttempts = Math.min(5, totalPages);
+
+  while (pagesToTry.size < maxAttempts) {
+    pagesToTry.add(Math.floor(Math.random() * totalPages) + 1);
+  }
+
+  for (const page of pagesToTry) {
+    const data = page === 1 ? firstPageData : await fetchDiscoverPage(page);
     const results = (data.results || []).map((item: any) => ({
       ...item,
       media_type: mediaType,

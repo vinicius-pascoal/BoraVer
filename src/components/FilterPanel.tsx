@@ -31,6 +31,7 @@ const PLATFORMS = [
   "Max",
   "Apple TV+",
   "Globoplay",
+  "Crunchyroll",
 ];
 
 const DURATIONS = [
