@@ -121,8 +121,8 @@ async function discoverContent(
     );
     baseParams.append("with_original_language", "ja");
   } else if (filters.genres && filters.genres.length > 0) {
-    // Use OR between selected genres to avoid over-restrictive searches.
-    baseParams.append("with_genres", filters.genres.join("|"));
+    // Require all selected genres (AND behavior).
+    baseParams.append("with_genres", filters.genres.join(","));
   }
 
   if (platformIds.length > 0) {
