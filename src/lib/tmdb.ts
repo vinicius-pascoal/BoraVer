@@ -232,6 +232,7 @@ async function getAvailableDetails(
       ...details,
       media_type: mediaType,
       providers: regionData.flatrate || [],
+      watch_link: regionData.link || null,
       trailer,
     };
   } catch (error) {
@@ -240,6 +241,7 @@ async function getAvailableDetails(
       id: contentId,
       media_type: mediaType,
       providers: [],
+      watch_link: null,
       trailer: null,
     };
   }

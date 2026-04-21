@@ -64,9 +64,29 @@ export function ContentCard({ content }: ContentCardProps) {
   const genres = content.genres?.map((g: any) => g.name).join(", ") || "N/A";
   const genresList = content.genres || [];
   const trailer = content.trailer;
+  const watchLink =
+    typeof content.watch_link === "string" ? content.watch_link : null;
   const trailerUrl = trailer?.key
     ? `https://www.youtube.com/embed/${trailer.key}?autoplay=1&rel=0`
     : null;
+
+  const buildProviderUrl = (providerName: string) => {
+    const encodedTitle = encodeURIComponent(title || "");
+    const providerKey = providerName.toLowerCase();
+
+    const providerSearchMap: Record<string, string> = {
+      netflix: `https://www.netflix.com/search?q=${encodedTitle}`,
+      "prime video": `https://www.primevideo.com/search/ref=atv_nb_sr?phrase=${encodedTitle}`,
+      "disney+": `https://www.disneyplus.com/search/${encodedTitle}`,
+      max: `https://play.max.com/search?q=${encodedTitle}`,
+      "apple tv+": `https://tv.apple.com/search?term=${encodedTitle}`,
+      globoplay: `https://globoplay.globo.com/busca/?q=${encodedTitle}`,
+      crunchyroll: `https://www.crunchyroll.com/search?q=${encodedTitle}`,
+      hulu: `https://www.hulu.com/search?q=${encodedTitle}`,
+    };
+
+    return providerSearchMap[providerKey] || watchLink || "#";
+  };
 
   const duration = isMovie
     ? content.runtime
@@ -190,9 +210,13 @@ export function ContentCard({ content }: ContentCardProps) {
                 </h4>
                 <div className="flex flex-wrap gap-2">
                   {content.providers.map((provider: any) => (
-                    <div
+                    <a
                       key={provider.provider_id}
-                      className="flex items-center gap-2 bg-black/35 px-3 py-2 rounded-lg border border-violet-300/20"
+                      href={buildProviderUrl(provider.provider_name)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Abrir ${provider.provider_name} em uma nova aba`}
+                      className="flex items-center gap-2 bg-black/35 px-3 py-2 rounded-lg border border-violet-300/20 transition-colors hover:bg-black/55 hover:border-violet-200/40"
                     >
                       {provider.logo_path && (
                         <Image
@@ -206,7 +230,7 @@ export function ContentCard({ content }: ContentCardProps) {
                       <span className="text-sm font-medium">
                         {provider.provider_name}
                       </span>
-                    </div>
+                    </a>
                   ))}
                 </div>
               </div>
