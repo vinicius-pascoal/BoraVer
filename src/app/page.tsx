@@ -73,13 +73,13 @@ export default function Home() {
     <div className="min-h-screen flex flex-col text-white">
       <Header />
 
-      <main className="flex-1 container py-12">
-        <div className="space-y-8">
+      <main className="flex-1 w-full max-w-8xl mx-auto px-4 py-8">
+        <div className="space-y-6">
           {/* Filtros e Conteúdo */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
             {/* Sidebar de Filtros */}
             <div className="lg:col-span-1">
-              <div className="sticky top-24">
+              <div className="sticky top-20">
                 <FilterPanel
                   onFiltersChange={handleFilterChange}
                   isLoading={isLoading}
@@ -124,7 +124,7 @@ export default function Home() {
             </div>
 
             {/* Resultado */}
-            <div className="lg:col-span-2">
+            <div className="lg:col-span-3">
               {error && (
                 <div className="bg-red-900/20 border border-red-500 text-red-200 px-6 py-4 rounded-lg mb-6">
                   {error}

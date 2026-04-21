@@ -11,8 +11,8 @@ export function Footer({ onOpenAbout }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-dark border-t border-primary/20 mt-12">
-      <div className="container py-8">
+    <footer className="bg-dark border-t border-primary/20 mt-8">
+      <div className="max-w-8xl mx-auto px-4 py-6">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <div>
             <p className="text-gray-400">

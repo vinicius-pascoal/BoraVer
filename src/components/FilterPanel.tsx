@@ -123,8 +123,8 @@ export function FilterPanel({ onFiltersChange, isLoading }: FilterProps) {
   };
 
   return (
-    <div className="rounded-2xl border border-violet-300/20 bg-gradient-to-b from-violet-500/10 to-black/45 backdrop-blur-md p-4 space-y-4 shadow-[0_12px_40px_rgba(0,0,0,0.45)]">
-      <div className="flex items-start justify-between gap-3">
+    <div className="rounded-2xl border border-violet-300/20 bg-gradient-to-b from-violet-500/10 to-black/45 backdrop-blur-md p-3 space-y-3 shadow-[0_12px_40px_rgba(0,0,0,0.45)]">
+      <div className="flex items-start justify-between gap-2">
         <div>
           <h3 className="text-lg font-semibold text-white">Filtros</h3>
           <p className="text-xs text-gray-400 mt-1">
@@ -148,8 +148,8 @@ export function FilterPanel({ onFiltersChange, isLoading }: FilterProps) {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        <label className="space-y-1.5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+        <label className="space-y-1">
           <span className="text-xs font-semibold uppercase tracking-[0.14em] text-violet-100/90">
             Tipo
           </span>
@@ -172,7 +172,7 @@ export function FilterPanel({ onFiltersChange, isLoading }: FilterProps) {
           </div>
         </label>
 
-        <label className="space-y-1.5">
+        <label className="space-y-1">
           <span className="text-xs font-semibold uppercase tracking-[0.14em] text-violet-100/90">
             Duração
           </span>
@@ -228,7 +228,7 @@ export function FilterPanel({ onFiltersChange, isLoading }: FilterProps) {
             {filters.genres.length > 0 ? selectedGenreNames : "Todos"}
           </span>
         </summary>
-        <div className="filters-scroll filter-section-body max-h-52 overflow-y-auto">
+        <div className="filters-scroll filter-section-body max-h-48 overflow-y-auto">
           {GENRES.map((genre) => (
             <label
               key={genre.id}
@@ -254,7 +254,7 @@ export function FilterPanel({ onFiltersChange, isLoading }: FilterProps) {
             {filters.platforms.length > 0 ? selectedPlatforms : "Todas"}
           </span>
         </summary>
-        <div className="filters-scroll filter-section-body max-h-44 overflow-y-auto">
+        <div className="filters-scroll filter-section-body max-h-40 overflow-y-auto">
           {PLATFORMS.map((platform) => (
             <label
               key={platform}
