@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
+import { TrailerModal } from "./TrailerModal";
 
 interface ContentCardProps {
   content: any;
@@ -14,28 +15,6 @@ export function ContentCard({ content }: ContentCardProps) {
   useEffect(() => {
     setIsSynopsisExpanded(false);
   }, [content?.id]);
-
-  useEffect(() => {
-    if (!isTrailerOpen) {
-      return;
-    }
-
-    const originalOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-
-    const handleEsc = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setIsTrailerOpen(false);
-      }
-    };
-
-    document.addEventListener("keydown", handleEsc);
-
-    return () => {
-      document.removeEventListener("keydown", handleEsc);
-      document.body.style.overflow = originalOverflow;
-    };
-  }, [isTrailerOpen]);
 
   if (!content) return null;
 
@@ -240,47 +219,12 @@ export function ContentCard({ content }: ContentCardProps) {
         </div>
       </div>
 
-      {isTrailerOpen && trailerUrl && (
-        <div
-          className="fixed inset-0 z-[110] flex items-center justify-center p-4"
-          role="dialog"
-          aria-modal="true"
-          aria-label="Trailer do conteúdo"
-          onClick={() => setIsTrailerOpen(false)}
-        >
-          <div className="absolute inset-0 bg-black/90 backdrop-blur-sm" />
-
-          <div
-            className="relative w-full max-w-4xl overflow-hidden rounded-2xl border border-white/10 bg-[#0b0b12] shadow-[0_24px_80px_rgba(0,0,0,0.7)]"
-            onClick={(event) => event.stopPropagation()}
-          >
-            <div className="flex items-center justify-between gap-4 border-b border-white/10 px-4 py-3 sm:px-5">
-              <div>
-                <p className="text-sm font-semibold text-white">Trailer</p>
-                <p className="text-xs text-gray-400">YouTube embutido no app</p>
-              </div>
-              <button
-                type="button"
-                onClick={() => setIsTrailerOpen(false)}
-                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition-colors hover:bg-white/15"
-                aria-label="Fechar trailer"
-              >
-                X
-              </button>
-            </div>
-
-            <div className="aspect-video bg-black">
-              <iframe
-                src={trailerUrl}
-                title={trailer?.name || "Trailer"}
-                className="h-full w-full"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-              />
-            </div>
-          </div>
-        </div>
-      )}
+      <TrailerModal
+        isOpen={isTrailerOpen}
+        onClose={() => setIsTrailerOpen(false)}
+        trailerUrl={trailerUrl}
+        trailerName={trailer?.name}
+      />
     </div>
   );
 }
