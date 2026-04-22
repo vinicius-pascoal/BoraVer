@@ -166,12 +166,10 @@ h3 {
 .filter-select {
   width: 100%;
   appearance: none;
-  border-radius: 0.9rem;
-  border: 1px solid rgba(196, 181, 253, 0.28);
-  background:
-    linear-gradient(135deg, rgba(167, 139, 250, 0.18) 0%, rgba(139, 92, 246, 0.08) 45%, rgba(7, 4, 12, 0.86) 100%),
-    radial-gradient(circle at 8% 12%, rgba(216, 180, 254, 0.18), transparent 36%);
-  color: rgba(250, 245, 255, 0.96);
+  border-radius: 0.75rem;
+  border: 1.2px solid rgba(196, 181, 253, 0.35);
+  background: rgba(30, 15, 50, 0.7);
+  color: rgba(250, 245, 255, 0.95);
   font-family: "Trebuchet MS", "Segoe UI", sans-serif;
   font-size: 0.88rem;
   line-height: 1.5;
@@ -181,19 +179,22 @@ h3 {
   white-space: nowrap;
   overflow: hidden;
   outline: none;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 8px 20px rgba(10, 6, 18, 0.38);
-  transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease, background-color 180ms ease;
   cursor: pointer;
 }
 
 .filter-select:focus {
-  border-color: rgba(216, 180, 254, 0.78);
-  box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.27), 0 12px 24px rgba(45, 22, 82, 0.4);
+  border-color: rgba(216, 180, 254, 0.85);
+  background: rgba(40, 20, 65, 0.8);
+  box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.25), 0 8px 20px rgba(45, 22, 82, 0.35);
 }
 
 .filter-select:hover:not(:disabled) {
-  border-color: rgba(216, 180, 254, 0.55);
+  border-color: rgba(216, 180, 254, 0.6);
+  background: rgba(35, 18, 60, 0.8);
   transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
 }
 
 .filter-select:disabled {
@@ -226,13 +227,12 @@ h3 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-radius: 0.9rem;
-  border: 1px solid rgba(196, 181, 253, 0.28);
-  background:
-    linear-gradient(135deg, rgba(167, 139, 250, 0.16) 0%, rgba(139, 92, 246, 0.08) 45%, rgba(7, 4, 12, 0.86) 100%),
-    radial-gradient(circle at 10% 10%, rgba(216, 180, 254, 0.14), transparent 34%);
-  padding: 0.72rem 0.85rem;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 8px 20px rgba(10, 6, 18, 0.38);
+  border-radius: 0.75rem;
+  border: 1.2px solid rgba(196, 181, 253, 0.35);
+  background: rgba(30, 15, 50, 0.7);
+  padding: 0.8rem 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: background-color 180ms ease, border-color 180ms ease;
 }
 
 .filter-control-label {
@@ -260,9 +260,9 @@ h3 {
 }
 
 .filter-toggle-on {
-  background: linear-gradient(90deg, rgba(167, 139, 250, 0.9) 0%, rgba(139, 92, 246, 0.95) 100%);
-  border-color: rgba(216, 180, 254, 0.65);
-  box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.2);
+  background: rgba(167, 139, 250, 0.85);
+  border-color: rgba(216, 180, 254, 0.7);
+  box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.22), 0 2px 8px rgba(167, 139, 250, 0.3);
 }
 
 .filter-toggle-off {
@@ -281,12 +281,11 @@ h3 {
 }
 
 .filter-section {
-  border-radius: 0.9rem;
-  border: 1px solid rgba(196, 181, 253, 0.28);
-  background:
-    linear-gradient(135deg, rgba(167, 139, 250, 0.14) 0%, rgba(139, 92, 246, 0.06) 45%, rgba(8, 5, 13, 0.85) 100%),
-    radial-gradient(circle at 8% 10%, rgba(216, 180, 254, 0.12), transparent 32%);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 8px 20px rgba(10, 6, 18, 0.34);
+  border-radius: 0.75rem;
+  border: 1.2px solid rgba(196, 181, 253, 0.35);
+  background: rgba(30, 15, 50, 0.7);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: background-color 180ms ease, border-color 180ms ease;
 }
 
 .filter-section-summary {
@@ -295,8 +294,13 @@ h3 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.7rem;
-  padding: 0.72rem 0.85rem;
+  gap: 0.9rem;
+  padding: 0.85rem 1rem;
+  transition: background-color 160ms ease;
+}
+
+.filter-section-summary:hover {
+  background: rgba(139, 92, 246, 0.08);
 }
 
 .filter-section-summary::-webkit-details-marker {
@@ -310,21 +314,22 @@ h3 {
 }
 
 .filter-section-selected {
-  max-width: 70%;
+  max-width: 65%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   text-align: right;
-  color: rgba(221, 214, 254, 0.8);
-  font-size: 0.78rem;
+  color: rgba(196, 181, 253, 0.9);
+  font-size: 0.81rem;
+  font-weight: 500;
 }
 
 .filter-section-body {
-  border-top: 1px solid rgba(196, 181, 253, 0.16);
+  border-top: 1px solid rgba(196, 181, 253, 0.2);
   display: grid;
   grid-template-columns: repeat(1, minmax(0, 1fr));
-  gap: 0.5rem;
-  padding: 0.58rem 0.7rem 0.7rem;
+  gap: 0.6rem;
+  padding: 0.7rem 0.85rem 0.85rem;
 }
 
 @media (min-width: 640px) {
@@ -336,19 +341,20 @@ h3 {
 .filter-list-item {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.65rem;
   border-radius: 0.7rem;
-  border: 1px solid transparent;
-  padding: 0.46rem 0.58rem;
-  font-size: 0.9rem;
-  color: rgba(243, 232, 255, 0.95);
-  transition: border-color 160ms ease, background-color 160ms ease, transform 160ms ease;
+  border: 1.1px solid rgba(196, 181, 253, 0.2);
+  padding: 0.55rem 0.7rem;
+  font-size: 0.88rem;
+  color: rgba(240, 232, 255, 0.9);
+  background: rgba(139, 92, 246, 0.04);
+  transition: border-color 150ms ease, background-color 150ms ease, transform 150ms ease;
 }
 
 .filter-list-item:hover {
-  border-color: rgba(196, 181, 253, 0.3);
-  background: rgba(139, 92, 246, 0.13);
-  transform: translateY(-1px);
+  border-color: rgba(196, 181, 253, 0.5);
+  background: rgba(139, 92, 246, 0.22);
+  transform: translateY(-1.5px);
 }
 
 .filter-check {

@@ -126,21 +126,21 @@ export function FilterPanel({ onFiltersChange, isLoading }: FilterProps) {
     <div className="rounded-2xl border border-violet-300/20 bg-gradient-to-b from-violet-500/10 to-black/45 backdrop-blur-md p-4 sm:p-5 space-y-4 sm:space-y-5 shadow-[0_12px_40px_rgba(0,0,0,0.45)]">
       <div className="flex items-start justify-between gap-3 sm:gap-4">
         <div>
-          <h3 className="text-lg font-semibold text-white">Filtros</h3>
-          <p className="text-xs text-gray-400 mt-1">
+          <h3 className="text-lg font-bold text-white tracking-tight">Filtros</h3>
+          <p className="text-xs text-gray-400/90 mt-1.5">
             Refine seu sorteio em segundos
           </p>
         </div>
 
         <div className="text-right">
-          <span className="inline-flex items-center rounded-full border border-violet-300/40 bg-violet-500/15 px-3 py-1 text-xs font-semibold text-violet-200">
+          <span className="inline-flex items-center rounded-full border border-violet-400/40 bg-violet-950/60 px-3 py-1.5 text-xs font-semibold text-violet-200/90 shadow-sm">
             {selectedCount} selecionado{selectedCount === 1 ? "" : "s"}
           </span>
           {selectedCount > 0 && (
             <button
               onClick={clearFilters}
               disabled={isLoading}
-              className="mt-2 block w-full text-xs text-gray-300 hover:text-white transition-colors disabled:opacity-50"
+              className="mt-2.5 block w-full text-xs font-medium text-gray-300 hover:text-violet-300 transition-colors disabled:opacity-50 hover:underline underline-offset-2"
             >
               Limpar filtros
             </button>
@@ -148,9 +148,9 @@ export function FilterPanel({ onFiltersChange, isLoading }: FilterProps) {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
         <label className="space-y-2">
-          <span className="text-xs font-semibold uppercase tracking-[0.14em] text-violet-100/90">
+          <span className="text-xs font-bold uppercase tracking-[0.12em] text-violet-200/95">
             Tipo
           </span>
           <div className="filter-select-shell">
@@ -173,7 +173,7 @@ export function FilterPanel({ onFiltersChange, isLoading }: FilterProps) {
         </label>
 
         <label className="space-y-2">
-          <span className="text-xs font-semibold uppercase tracking-[0.14em] text-violet-100/90">
+          <span className="text-xs font-bold uppercase tracking-[0.12em] text-violet-200/95">
             Duração
           </span>
           <div className="filter-select-shell">
