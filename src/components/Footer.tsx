@@ -11,7 +11,7 @@ export function Footer({ onOpenAbout }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="vh-compact-footer sticky bottom-0 z-40 backdrop-blur-md border-t border-primary/30 bg-gradient-to-r from-darker/95 via-dark/90 to-darker/95 shadow-lg shadow-primary/10">
+    <footer className="vh-compact-footer sticky bottom-0 z-40 backdrop-blur-md border-t border-primary/30 bg-gradient-to-r from-darker/95 via-dark/90 to-darker/95 shadow-lg shadow-primary/10 hidden sm:block">
       {/* Gradient line accent */}
       <div className="h-0.5 w-full bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
 
