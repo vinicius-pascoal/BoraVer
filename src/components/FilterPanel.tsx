@@ -123,7 +123,7 @@ export function FilterPanel({ onFiltersChange, isLoading }: FilterProps) {
   };
 
   return (
-    <div className="rounded-2xl border border-violet-300/20 bg-gradient-to-b from-violet-500/10 to-black/45 backdrop-blur-md p-4 sm:p-5 space-y-4 sm:space-y-5 shadow-[0_12px_40px_rgba(0,0,0,0.45)]">
+    <div className="vh-compact-filter-panel rounded-2xl border border-violet-300/20 bg-gradient-to-b from-violet-500/10 to-black/45 backdrop-blur-md p-4 sm:p-5 space-y-4 sm:space-y-5 shadow-[0_12px_40px_rgba(0,0,0,0.45)]">
       <div className="flex items-start justify-between gap-3 sm:gap-4">
         <div>
           <h3 className="text-lg font-bold text-white tracking-tight">Filtros</h3>

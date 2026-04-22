@@ -11,12 +11,12 @@ export function Footer({ onOpenAbout }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="sticky bottom-0 z-40 backdrop-blur-md border-t border-primary/30 bg-gradient-to-r from-darker/95 via-dark/90 to-darker/95 shadow-lg shadow-primary/10">
+    <footer className="vh-compact-footer sticky bottom-0 z-40 backdrop-blur-md border-t border-primary/30 bg-gradient-to-r from-darker/95 via-dark/90 to-darker/95 shadow-lg shadow-primary/10">
       {/* Gradient line accent */}
       <div className="h-0.5 w-full bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
 
-      <div className="max-w-8xl mx-auto px-3 sm:px-4 md:px-6 py-4 sm:py-5 md:py-6">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4 sm:gap-6 md:gap-8">
+      <div className="vh-compact-footer-inner max-w-8xl mx-auto px-3 sm:px-4 md:px-6 py-4 sm:py-5 md:py-6">
+        <div className="vh-compact-footer-content flex flex-col md:flex-row justify-between items-center gap-4 sm:gap-6 md:gap-8">
           {/* Copyright and Attribution */}
           <div className="space-y-1 text-center md:text-left">
             <p className="text-gray-300 font-body">

@@ -370,6 +370,99 @@ h3 {
   }
 }
 
+@media (min-width: 1024px) and (max-height: 860px) {
+  .vh-compact-main {
+    padding-top: 0.85rem;
+    padding-bottom: 0.85rem;
+  }
+
+  .vh-compact-grid {
+    gap: 1rem;
+  }
+
+  .vh-compact-header .vh-compact-header-content {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    gap: 1rem;
+  }
+
+  .vh-compact-header .vh-compact-logo {
+    height: 2.6rem;
+    width: auto;
+  }
+
+  .vh-compact-header .vh-compact-header-title {
+    font-size: 1.45rem;
+    line-height: 1.12;
+  }
+
+  .vh-compact-header .vh-compact-header-description {
+    margin-top: 0.2rem;
+    font-size: 0.77rem;
+    line-height: 1.28;
+  }
+
+  .vh-compact-filter-sticky {
+    top: 4.25rem;
+  }
+
+  .vh-compact-filter-panel {
+    padding: 0.8rem;
+    gap: 0.7rem;
+    max-height: calc(100vh - 12.5rem);
+    overflow-y: auto;
+  }
+
+  .vh-compact-filter-panel .filter-section-body {
+    padding: 0.55rem 0.7rem 0.7rem;
+    gap: 0.45rem;
+  }
+
+  .vh-compact-filter-panel .filter-list-item {
+    padding: 0.4rem 0.55rem;
+    font-size: 0.8rem;
+  }
+
+  .vh-compact-filter-panel .filter-section-summary {
+    padding: 0.65rem 0.78rem;
+  }
+
+  .vh-compact-filter-panel .filter-control-card {
+    padding: 0.6rem 0.75rem;
+  }
+
+  .vh-compact-filter-panel .filter-select {
+    min-height: 2.38rem;
+    font-size: 0.8rem;
+    padding: 0.58rem 2.35rem 0.58rem 1.95rem;
+  }
+
+  .vh-compact-action-btn {
+    margin-top: 0.7rem;
+    padding-top: 0.58rem;
+    padding-bottom: 0.58rem;
+    font-size: 0.82rem;
+  }
+
+  .vh-compact-footer {
+    position: static;
+  }
+
+  .vh-compact-footer .vh-compact-footer-inner {
+    padding-top: 0.55rem;
+    padding-bottom: 0.65rem;
+  }
+
+  .vh-compact-footer .vh-compact-footer-content {
+    gap: 0.6rem;
+  }
+
+  .vh-compact-footer p {
+    font-size: 0.78rem;
+    line-height: 1.25;
+  }
+}
+
 .poster-hover-shell {
   isolation: isolate;
   perspective: 1000px;

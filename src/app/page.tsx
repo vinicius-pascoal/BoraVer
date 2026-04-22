@@ -73,13 +73,13 @@ export default function Home() {
     <div className="min-h-screen flex flex-col text-white">
       <Header />
 
-      <main className="flex-1 w-full max-w-8xl mx-auto px-3 sm:px-4 md:px-6 py-6 sm:py-8 md:py-10">
+      <main className="vh-compact-main flex-1 w-full max-w-8xl mx-auto px-3 sm:px-4 md:px-6 py-6 sm:py-8 md:py-10">
         <div className="space-y-6 sm:space-y-8">
           {/* Filtros e Conteúdo */}
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
+          <div className="vh-compact-grid grid grid-cols-1 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
             {/* Sidebar de Filtros */}
             <div className="lg:col-span-1">
-              <div className="sticky top-16 sm:top-20 md:top-24">
+              <div className="vh-compact-filter-sticky sticky top-16 sm:top-20 md:top-24">
                 <FilterPanel
                   onFiltersChange={handleFilterChange}
                   isLoading={isLoading}
@@ -88,7 +88,7 @@ export default function Home() {
                 <button
                   onClick={fetchRandomContent}
                   disabled={isLoading}
-                  className="group w-full mt-4 sm:mt-6 rounded-xl border border-violet-300/35 bg-gradient-to-r from-violet-500/85 to-purple-500/85 hover:from-violet-400 hover:to-purple-400 disabled:from-gray-500 disabled:to-gray-600 text-white font-bold py-3 sm:py-3.5 px-4 sm:px-5 text-sm sm:text-base transition-all disabled:opacity-50 shadow-[0_10px_28px_rgba(139,92,246,0.35)] hover:shadow-[0_14px_34px_rgba(139,92,246,0.45)]"
+                  className="vh-compact-action-btn group w-full mt-4 sm:mt-6 rounded-xl border border-violet-300/35 bg-gradient-to-r from-violet-500/85 to-purple-500/85 hover:from-violet-400 hover:to-purple-400 disabled:from-gray-500 disabled:to-gray-600 text-white font-bold py-3 sm:py-3.5 px-4 sm:px-5 text-sm sm:text-base transition-all disabled:opacity-50 shadow-[0_10px_28px_rgba(139,92,246,0.35)] hover:shadow-[0_14px_34px_rgba(139,92,246,0.45)]"
                 >
                   {isLoading ? (
                     <span className="flex items-center justify-center">
