@@ -73,13 +73,13 @@ export default function Home() {
     <div className="min-h-screen flex flex-col text-white">
       <Header />
 
-      <main className="flex-1 w-full max-w-8xl mx-auto px-4 py-8">
-        <div className="space-y-6">
+      <main className="flex-1 w-full max-w-8xl mx-auto px-3 sm:px-4 md:px-6 py-6 sm:py-8 md:py-10">
+        <div className="space-y-6 sm:space-y-8">
           {/* Filtros e Conteúdo */}
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
             {/* Sidebar de Filtros */}
             <div className="lg:col-span-1">
-              <div className="sticky top-20">
+              <div className="sticky top-16 sm:top-20 md:top-24">
                 <FilterPanel
                   onFiltersChange={handleFilterChange}
                   isLoading={isLoading}
@@ -88,7 +88,7 @@ export default function Home() {
                 <button
                   onClick={fetchRandomContent}
                   disabled={isLoading}
-                  className="group w-full mt-6 rounded-xl border border-violet-300/35 bg-gradient-to-r from-violet-500/85 to-purple-500/85 hover:from-violet-400 hover:to-purple-400 disabled:from-gray-500 disabled:to-gray-600 text-white font-bold py-3.5 px-5 text-base transition-all disabled:opacity-50 shadow-[0_10px_28px_rgba(139,92,246,0.35)] hover:shadow-[0_14px_34px_rgba(139,92,246,0.45)]"
+                  className="group w-full mt-4 sm:mt-6 rounded-xl border border-violet-300/35 bg-gradient-to-r from-violet-500/85 to-purple-500/85 hover:from-violet-400 hover:to-purple-400 disabled:from-gray-500 disabled:to-gray-600 text-white font-bold py-3 sm:py-3.5 px-4 sm:px-5 text-sm sm:text-base transition-all disabled:opacity-50 shadow-[0_10px_28px_rgba(139,92,246,0.35)] hover:shadow-[0_14px_34px_rgba(139,92,246,0.45)]"
                 >
                   {isLoading ? (
                     <span className="flex items-center justify-center">
@@ -126,13 +126,13 @@ export default function Home() {
             {/* Resultado */}
             <div className="lg:col-span-3">
               {error && (
-                <div className="bg-red-900/20 border border-red-500 text-red-200 px-6 py-4 rounded-lg mb-6">
+                <div className="bg-red-900/20 border border-red-500 text-red-200 px-4 sm:px-6 py-3 sm:py-4 rounded-lg mb-4 sm:mb-6 text-sm sm:text-base">
                   {error}
                 </div>
               )}
 
               {isLoading ? (
-                <div className="sorting-card rounded-2xl border border-violet-300/25 bg-gradient-to-b from-violet-500/10 to-black/45 p-10 text-center shadow-[0_12px_40px_rgba(0,0,0,0.45)]">
+                <div className="sorting-card rounded-2xl border border-violet-300/25 bg-gradient-to-b from-violet-500/10 to-black/45 p-6 sm:p-8 md:p-10 text-center shadow-[0_12px_40px_rgba(0,0,0,0.45)]">
                   <div className="sorting-orbit mb-5" aria-hidden="true">
                     <span className="sorting-dot sorting-dot-1" />
                     <span className="sorting-dot sorting-dot-2" />

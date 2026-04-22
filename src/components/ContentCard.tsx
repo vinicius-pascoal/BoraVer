@@ -100,7 +100,7 @@ export function ContentCard({ content }: ContentCardProps) {
 
   return (
     <div className="result-reveal-card rounded-2xl border border-violet-300/20 bg-gradient-to-b from-violet-500/10 to-black/45 backdrop-blur-md overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.45)]">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 p-5">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5 md:gap-6 p-4 sm:p-5 md:p-6">
         {/* Pôster */}
         <div className="md:col-span-1 flex justify-center items-start self-start result-reveal-item result-delay-1">
           <div className="poster-hover-shell relative inline-block w-fit h-fit max-w-full rounded-2xl">
@@ -120,8 +120,8 @@ export function ContentCard({ content }: ContentCardProps) {
         {/* Informações */}
         <div className="md:col-span-2">
           <div className="result-reveal-item result-delay-1">
-            <div className="flex items-center gap-3 mb-2">
-              <h2 className="text-3xl font-bold text-white break-words">
+            <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4 flex-wrap">
+              <h2 className="text-2xl sm:text-3xl font-bold text-white break-words">
                 {title || "Título não disponível"}
               </h2>
               <span className="px-3 py-1 bg-violet-500/15 border border-violet-300/40 text-violet-200 rounded-full text-sm font-medium whitespace-nowrap">
@@ -129,27 +129,27 @@ export function ContentCard({ content }: ContentCardProps) {
               </span>
             </div>
 
-            <div className="flex flex-wrap gap-2 mb-4 result-reveal-item result-delay-2">
-              <span className="rounded-full bg-black/40 px-3 py-1 text-xs text-gray-200 border border-violet-300/20">
+            <div className="flex flex-wrap gap-2 mb-4 sm:mb-5 result-reveal-item result-delay-2">
+              <span className="rounded-full bg-black/40 px-3 py-1 text-xs sm:text-sm text-gray-200 border border-violet-300/20">
                 {year || "Ano não informado"}
               </span>
-              <span className="rounded-full bg-black/40 px-3 py-1 text-xs text-gray-200 border border-violet-300/20">
+              <span className="rounded-full bg-black/40 px-3 py-1 text-xs sm:text-sm text-gray-200 border border-violet-300/20">
                 {duration}
               </span>
               {typeof content.vote_average === "number" && (
-                <span className="rounded-full bg-amber-400/15 px-3 py-1 text-xs text-amber-200 border border-amber-300/30">
+                <span className="rounded-full bg-amber-400/15 px-3 py-1 text-xs sm:text-sm text-amber-200 border border-amber-300/30">
                   Nota {content.vote_average.toFixed(1)}
                 </span>
               )}
               {collectionName && (
-                <span className="rounded-full bg-violet-500/20 px-3 py-1 text-xs text-violet-100 border border-violet-300/35 max-w-full truncate">
+                <span className="rounded-full bg-violet-500/20 px-3 py-1 text-xs sm:text-sm text-violet-100 border border-violet-300/35 max-w-full truncate">
                   Saga: {collectionName}
                 </span>
               )}
             </div>
 
             {trailerUrl && (
-              <div className="mb-4 result-reveal-item result-delay-2">
+              <div className="mb-4 sm:mb-5 result-reveal-item result-delay-2">
                 <button
                   type="button"
                   onClick={() => setIsTrailerOpen(true)}
@@ -163,8 +163,8 @@ export function ContentCard({ content }: ContentCardProps) {
               </div>
             )}
 
-            <div className="mb-4 result-reveal-item result-delay-2">
-              <h4 className="text-sm font-semibold text-gray-300 mb-2">
+            <div className="mb-4 sm:mb-5 result-reveal-item result-delay-2">
+              <h4 className="text-sm font-semibold text-gray-300 mb-2 sm:mb-3">
                 Gêneros
               </h4>
               {genresList.length > 0 ? (
@@ -172,7 +172,7 @@ export function ContentCard({ content }: ContentCardProps) {
                   {genresList.map((genre: any) => (
                     <span
                       key={genre.id}
-                      className="rounded-full border border-violet-300/30 bg-violet-500/15 px-3 py-1 text-xs text-violet-200"
+                      className="rounded-full border border-violet-300/30 bg-violet-500/15 px-3 py-1 text-xs sm:text-sm text-violet-200"
                     >
                       {genre.name}
                     </span>
@@ -183,7 +183,7 @@ export function ContentCard({ content }: ContentCardProps) {
               )}
             </div>
 
-            <div className="synopsis-scroll mb-5 rounded-xl border border-violet-300/15 bg-black/25 p-4 result-reveal-item result-delay-3 max-h-none overflow-visible md:max-h-48 md:overflow-y-auto pr-2">
+            <div className="synopsis-scroll mb-5 sm:mb-6 rounded-xl border border-violet-300/15 bg-black/25 p-3 sm:p-4 result-reveal-item result-delay-3 max-h-none overflow-visible md:max-h-48 md:overflow-y-auto pr-2">
               <h4 className="text-sm font-semibold text-gray-300 mb-2">
                 Sinopse
               </h4>
@@ -204,7 +204,7 @@ export function ContentCard({ content }: ContentCardProps) {
 
             {/* Plataformas */}
             {content.providers && content.providers.length > 0 && (
-              <div className="mb-4 result-reveal-item result-delay-4">
+              <div className="mb-4 sm:mb-5 result-reveal-item result-delay-4">
                 <h4 className="text-sm font-semibold text-gray-300 mb-2">
                   Disponível em:
                 </h4>
@@ -227,7 +227,7 @@ export function ContentCard({ content }: ContentCardProps) {
                           className="rounded"
                         />
                       )}
-                      <span className="text-sm font-medium">
+                      <span className="text-xs sm:text-sm font-medium">
                         {provider.provider_name}
                       </span>
                     </a>

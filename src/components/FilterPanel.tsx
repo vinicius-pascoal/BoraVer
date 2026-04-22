@@ -123,8 +123,8 @@ export function FilterPanel({ onFiltersChange, isLoading }: FilterProps) {
   };
 
   return (
-    <div className="rounded-2xl border border-violet-300/20 bg-gradient-to-b from-violet-500/10 to-black/45 backdrop-blur-md p-3 space-y-3 shadow-[0_12px_40px_rgba(0,0,0,0.45)]">
-      <div className="flex items-start justify-between gap-2">
+    <div className="rounded-2xl border border-violet-300/20 bg-gradient-to-b from-violet-500/10 to-black/45 backdrop-blur-md p-4 sm:p-5 space-y-4 sm:space-y-5 shadow-[0_12px_40px_rgba(0,0,0,0.45)]">
+      <div className="flex items-start justify-between gap-3 sm:gap-4">
         <div>
           <h3 className="text-lg font-semibold text-white">Filtros</h3>
           <p className="text-xs text-gray-400 mt-1">
@@ -148,8 +148,8 @@ export function FilterPanel({ onFiltersChange, isLoading }: FilterProps) {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-        <label className="space-y-1">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+        <label className="space-y-2">
           <span className="text-xs font-semibold uppercase tracking-[0.14em] text-violet-100/90">
             Tipo
           </span>
@@ -172,7 +172,7 @@ export function FilterPanel({ onFiltersChange, isLoading }: FilterProps) {
           </div>
         </label>
 
-        <label className="space-y-1">
+        <label className="space-y-2">
           <span className="text-xs font-semibold uppercase tracking-[0.14em] text-violet-100/90">
             Duração
           </span>
